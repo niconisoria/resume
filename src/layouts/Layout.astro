@@ -11,8 +11,14 @@ import '../styles/global.css';
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
-	<body>
+	<body class="bg-[#FCFAF6] p-10">
 		<slot />
 	</body>
 </html>

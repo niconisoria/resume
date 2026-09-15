@@ -1,11 +1,30 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<Welcome />
+	<Header
+		name="Nicolas Nisoria"
+		subtitle="Senior Software Engineer"
+		links={[
+			{
+				label: "nicolas.nisoria@gmail.com",
+				href: "mailto:nicolas.nisoria@gmail.com",
+				icon: "email",
+			},
+			{
+				label: "niconisoria",
+				href: "https://linkedin.com/in/niconisoria",
+				icon: "linkedin",
+			},
+			{
+				label: "niconisoria",
+				href: "https://github.com/niconisoria",
+				icon: "github",
+			},
+			{ label: "Book a call", href: "#", icon: "booking" },
+			{ label: "Download PDF", href: "#", icon: "pdf" },
+		]}
+	/>
 </Layout>
