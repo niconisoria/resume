@@ -4,6 +4,9 @@ dist/
 # generated types
 .astro/
 
+# test run reports
+.vitest/
+
 # dependencies
 node_modules/
 

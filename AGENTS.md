@@ -19,6 +19,7 @@
 | UI | React 19 (`@astrojs/react`) |
 | Styling | Tailwind CSS 4 (`@tailwindcss/vite`) |
 | Runtime | Node.js ≥22.12 |
+| Test | `npm test` (Vitest + Astro Container API) |
 | Verify | `astro check` |
 
 ---
