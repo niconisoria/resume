@@ -9,7 +9,7 @@ const isExternal = href.startsWith('http');
 
 <a
   href={href}
-  class="inline-flex items-center gap-1 text-[#1B63A6]"
+  class="inline-flex items-center gap-1 text-navy-700"
   {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
 >
   <slot />
