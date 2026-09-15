@@ -1,22 +1,65 @@
-## Development
+# CLAUDE.md — resume
 
-When starting the dev server, use background mode:
+## Iron Laws
+
+1. **Spec first** — no code without a spec file in `docs/specs/`.
+2. **Test first** — write failing tests before implementation.
+3. **Verify before done** — run the app and confirm the feature works end-to-end before closing a task.
+4. **No secrets in code** — credentials/tokens go in `.env` (never committed).
+5. **CLAUDE.md < 200 lines** — move detail into linked docs, not here.
+
+---
+
+## Tech Stack
+
+| Layer | Choice |
+|---|---|
+| Language | JavaScript/TypeScript |
+| Framework | Astro 7 |
+| UI | React 19 (`@astrojs/react`) |
+| Styling | Tailwind CSS 4 (`@tailwindcss/vite`) |
+| Runtime | Node.js ≥22.12 |
+| Verify | `astro check` |
+
+---
+
+## Project Map
+
+```
+resume/
+├── CLAUDE.md              ← you are here (symlink → AGENTS.md)
+├── astro.config.mjs
+├── package.json
+├── docs/
+│   └── specs/             ← one .md per feature (brainstorm → stories → flows → impl)
+├── src/
+│   ├── assets/             ← static images/svg used by components
+│   ├── components/         ← Astro UI components
+│   ├── layouts/             ← page layout wrappers
+│   └── pages/               ← file-based routes
+└── public/                 ← static files served as-is (favicon etc)
+```
+
+---
+
+## Dev Server
+
+Run in background:
 
 ```
 astro dev --background
 ```
 
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+Manage with `astro dev stop`, `astro dev status`, `astro dev logs`.
 
-## Documentation
+---
 
-Full documentation: https://docs.astro.build
+## Docs
 
-Consult these guides before working on related tasks:
-
-- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
-- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
-- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
-- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+- [docs/specs/](docs/specs/) — feature specs (start here for any new work)
+- [Astro routing](https://docs.astro.build/en/guides/routing/)
+- [Astro components](https://docs.astro.build/en/basics/astro-components/)
+- [Framework components (React/Vue/Svelte)](https://docs.astro.build/en/guides/framework-components/)
+- [Content collections](https://docs.astro.build/en/guides/content-collections/)
+- [Styling / Tailwind](https://docs.astro.build/en/guides/styling/)
+- [i18n](https://docs.astro.build/en/guides/internationalization/)
