@@ -1,0 +1,31 @@
+---
+import SectionLabel from "./SectionLabel.astro";
+
+interface Props {
+  items: {
+    degree: string;
+    institution: string;
+    startDate: string;
+    endDate: string;
+  }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div>
+  <SectionLabel text="Education" />
+  <div class="mt-2 space-y-3">
+    {
+      items.map((item) => (
+        <div>
+          <div class="text-2xs text-ink-900">{item.degree}</div>
+          <div class="text-2xs font-medium text-ink-900">{item.institution}</div>
+          <div class="text-2xs text-ink-500">
+            {item.startDate}–{item.endDate}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>

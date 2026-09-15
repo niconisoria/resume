@@ -32,8 +32,10 @@ const {
 			rel="stylesheet"
 		/>
 	</head>
-	<body class="bg-paper p-10">
-		<slot />
+	<body class="min-h-screen bg-paper p-10">
+		<div class="mx-auto max-w-4xl">
+			<slot />
+		</div>
 	</body>
 </html>
 
@@ -41,7 +43,5 @@ const {
 	html,
 	body {
 		margin: 0;
-		width: 100%;
-		height: 100%;
 	}
 </style>

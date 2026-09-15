@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import Sidebar from "../components/Sidebar.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -27,4 +28,52 @@ import Layout from "../layouts/Layout.astro";
 			{ label: "Download PDF", href: "#", icon: "pdf" },
 		]}
 	/>
+	<div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[2fr_1fr]">
+		<main></main>
+		<Sidebar
+			summary="Software Engineer with over 7 years of experience building and improving large-scale systems in fintech, edtech, and hrtech. Deep specialization in Ruby/Rails, with working breadth across JavaScript, Python, and PHP."
+			certificates={{
+				items: [{ label: "Claude with the Anthropic API", href: "#" }],
+			}}
+			education={[
+				{
+					degree: "MSc Systems Engineering",
+					institution: "Universidad Tecnológica Nacional",
+					startDate: "2015",
+					endDate: "2020",
+				},
+			]}
+			languages={{
+				caption: "Commercial experience / years",
+				items: [
+					{ label: "Ruby", years: 7 },
+					{ label: "JavaScript/TypeScript", years: 7 },
+					{ label: "Python", years: 3 },
+					{ label: "PHP", years: 5 },
+				],
+				secondary: {
+					caption: "Side-project / Fast ramp-up",
+					items: ["Rust", "Go"],
+				},
+			}}
+			frameworks={{
+				caption: "Production use / years",
+				items: [
+					{ label: "Rails", years: 7 },
+					{ label: "React", years: 6 },
+					{ label: "FastAPI", years: 1 },
+				],
+				secondary: {
+					caption: "Side-project / Fast ramp-up",
+					items: ["Astro", "Flask"],
+				},
+			}}
+			selectedWork={[
+				{
+					label: "SCIM Bridge",
+					href: "https://github.com/niconisoria/scim-bridge",
+				},
+			]}
+		/>
+	</div>
 </Layout>

@@ -1,0 +1,84 @@
+---
+import ActionLink from "./ActionLink.astro";
+import Education from "./Education.astro";
+import SectionLabel from "./SectionLabel.astro";
+import SkillList from "./SkillList.astro";
+
+interface SkillGroup {
+  caption?: string;
+  items: { label: string; years?: number; href?: string }[];
+  secondary?: { caption: string; items: string[] };
+}
+
+interface EducationEntry {
+  degree: string;
+  institution: string;
+  startDate: string;
+  endDate: string;
+}
+
+interface Props {
+  summary: string;
+  languages: SkillGroup;
+  frameworks: SkillGroup;
+  education: EducationEntry[];
+  certificates: SkillGroup;
+  selectedWork: { label: string; href: string }[];
+}
+
+const {
+  summary,
+  languages,
+  frameworks,
+  education,
+  certificates,
+  selectedWork,
+} = Astro.props;
+---
+
+<aside class="rounded-md bg-navy-100 p-4 divide-y divide-navy-200">
+  <div class="pb-4">
+    <SectionLabel text="Summary" />
+    <p class="mt-2 text-2xs text-ink-900">{summary}</p>
+  </div>
+  <div class="py-4">
+    <Education items={education} />
+  </div>
+  <div class="py-4">
+    <SkillList
+      label="Certificates"
+      caption={certificates.caption}
+      items={certificates.items}
+    />
+  </div>
+  <div class="py-4">
+    <SkillList
+      label="Languages"
+      caption={languages.caption}
+      items={languages.items}
+      secondary={languages.secondary}
+    />
+  </div>
+  <div class="py-4">
+    <SkillList
+      label="Frameworks"
+      caption={frameworks.caption}
+      items={frameworks.items}
+      secondary={frameworks.secondary}
+    />
+  </div>
+  <div class="pt-4">
+    <SectionLabel text="Selected Work" />
+    <ul class="mt-2 space-y-1">
+      {
+        selectedWork.map((item) => (
+          <li>
+            <ActionLink href={item.href}>
+              <span class="text-2xs">{item.label}</span>
+            </ActionLink>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</aside>

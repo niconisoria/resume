@@ -10,4 +10,7 @@
 	--color-ink-500: #5c5c5c;
 	--color-paper: #fcfaf6;
 	--color-wood-500: #c9975a;
+
+	--text-2xs: 0.6875rem;
+	--text-2xs--line-height: 1rem;
 }

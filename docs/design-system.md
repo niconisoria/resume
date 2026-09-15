@@ -34,15 +34,21 @@ Driven by `prefers-color-scheme: dark` (no toggle needed — resume is read, not
 
 ## Typography
 
-| Role | Font | Weight |
-|---|---|---|
-| Display (name) | `Fraunces` | 700 |
-| Section label | `Inter`, uppercase, letter-spacing wide | 600 |
-| Body | `Inter` | 400 |
-| Entry title | `Inter` | 700 |
-| Subtitle | `Inter`, italic or navy-500 | 500 |
+| Role | Font | Weight | Size |
+|---|---|---|---|
+| Display (name) | `Fraunces` | 700 | — |
+| Section label | `Inter`, uppercase, letter-spacing wide | 600 | `text-xs` |
+| Body (prose, main column) | `Inter` | 400 | `text-sm` |
+| Sidebar content (all) | `Inter` | 400 | `text-2xs` |
+| Entry title | `Inter` | 700 | — |
+| Subtitle | `Inter`, italic or navy-500 | 500 | — |
+| Caption/meta | `Inter` | 400 | `text-2xs` (`0.6875rem`) |
 
 Google Fonts, loaded via `@fontsource` (self-hosted, no external request at build/print time — matters for a printable page) or a `<link>` in `Layout.astro`. Register as `--font-display` / `--font-sans` in the Tailwind v4 `@theme` block in `global.css`.
+
+`text-2xs` is a registered token (`@theme` in `global.css`), not an arbitrary value.
+
+Section label stays compact (`text-xs`) — distinguished from what's under it by weight/case/color (bold, uppercase, `navy-700`), not by being the biggest thing in the section. Everything inside the sidebar (Summary paragraph included) is `text-2xs` — the sidebar is scannable reference material, not reading prose. Content pieces are distinguished from each other by color/style (plain `ink-900` vs italic `navy-500` vs link `navy-700`), not by size. Only the main column's flowing prose (Entry bullets, once built) stays at Body's `text-sm`.
 
 ## Layout
 
