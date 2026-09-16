@@ -12,15 +12,17 @@
 
 ## Tech Stack
 
-| Layer | Choice |
-|---|---|
-| Language | JavaScript/TypeScript |
-| Framework | Astro 7 |
-| UI | React 19 (`@astrojs/react`) |
-| Styling | Tailwind CSS 4 (`@tailwindcss/vite`) |
-| Runtime | Node.js ≥22.12 |
-| Test | `npm test` (Vitest + Astro Container API) |
-| Verify | `astro check` |
+| Layer     | Choice                                                           |
+| --------- | ---------------------------------------------------------------- |
+| Language  | JavaScript/TypeScript                                            |
+| Framework | Astro 7                                                          |
+| UI        | React 19 (`@astrojs/react`)                                      |
+| Styling   | Tailwind CSS 4 (`@tailwindcss/vite`)                             |
+| Runtime   | Node.js ≥22.12                                                   |
+| Test      | `npm test` (Vitest + Astro Container API)                        |
+| Verify    | `astro check`                                                    |
+| Lint      | `npm run lint` (ESLint + eslint-plugin-astro)                    |
+| Format    | `npm run format` (Prettier + prettier-plugin-astro/-tailwindcss) |
 
 ---
 

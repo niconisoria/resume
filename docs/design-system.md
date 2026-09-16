@@ -4,45 +4,45 @@
 
 Palette inspired by a Strandberg guitar's blue-burst flame top: deep sapphire at the edges fading to a lighter cyan-blue center, near-black ebony/hardware, white trim.
 
-| Token | Hex | Use |
-|---|---|---|
-| `navy-900` | `#0A2A46` | Name/display heading text |
-| `navy-700` | `#1B63A6` | Section labels, links |
-| `navy-500` | `#4FA3DC` | Subtitles, hover state |
-| `navy-100` | `#E3F0FB` | Divider rule under name, subtle backgrounds |
-| `navy-200` | `#C9DFF2` | Sidebar divider rule — `navy-100` is the sidebar's own background, so its divider needs a step darker to actually show |
-| `ink-900` | `#141414` | Body text |
-| `ink-500` | `#5C5C5C` | Secondary text (dates, environment lines) |
-| `paper` | `#FCFAF6` | Page background — warm off-white, not pure white |
+| Token      | Hex       | Use                                                                                                                                      |
+| ---------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `navy-900` | `#0A2A46` | Name/display heading text                                                                                                                |
+| `navy-700` | `#1B63A6` | Section labels, links                                                                                                                    |
+| `navy-500` | `#4FA3DC` | Subtitles, hover state                                                                                                                   |
+| `navy-100` | `#E3F0FB` | Divider rule under name, subtle backgrounds                                                                                              |
+| `navy-200` | `#C9DFF2` | Sidebar divider rule — `navy-100` is the sidebar's own background, so its divider needs a step darker to actually show                   |
+| `ink-900`  | `#141414` | Body text                                                                                                                                |
+| `ink-500`  | `#5C5C5C` | Secondary text (dates, environment lines)                                                                                                |
+| `paper`    | `#FCFAF6` | Page background — warm off-white, not pure white                                                                                         |
 | `wood-500` | `#C9975A` | Secondary accent (guitar neck) — spent sparingly: name-underline rule, bullet dash marker. Never a second primary accent alongside blue. |
 
 Tailwind: register as `theme.colors.navy` / `theme.colors.ink` scale (v4 `@theme` block in `global.css`).
 
 ### Dark mode (screen only)
 
-| Token | Hex | Use |
-|---|---|---|
-| `paper-dark` | `#0D1116` | Page background |
-| `navy-900-dark` | `#DCEEFB` | Name/display heading text — must be redefined here, `navy-900` alone is unreadable on a dark ground |
-| `navy-100-dark` | `#142A42` | Divider rule, sidebar tint |
-| `navy-200-dark` | `#25456B` | Sidebar divider rule (same reasoning as light mode) |
-| `navy-500-dark` (accent) | `#6FB6E8` | Section labels, links, subtitles — lightened for contrast on dark bg |
-| `ink-900-dark` | `#EDEDED` | Body text |
-| `ink-500-dark` | `#9AA3AE` | Secondary text |
+| Token                    | Hex       | Use                                                                                                 |
+| ------------------------ | --------- | --------------------------------------------------------------------------------------------------- |
+| `paper-dark`             | `#0D1116` | Page background                                                                                     |
+| `navy-900-dark`          | `#DCEEFB` | Name/display heading text — must be redefined here, `navy-900` alone is unreadable on a dark ground |
+| `navy-100-dark`          | `#142A42` | Divider rule, sidebar tint                                                                          |
+| `navy-200-dark`          | `#25456B` | Sidebar divider rule (same reasoning as light mode)                                                 |
+| `navy-500-dark` (accent) | `#6FB6E8` | Section labels, links, subtitles — lightened for contrast on dark bg                                |
+| `ink-900-dark`           | `#EDEDED` | Body text                                                                                           |
+| `ink-500-dark`           | `#9AA3AE` | Secondary text                                                                                      |
 
 Driven by `prefers-color-scheme: dark` (no toggle needed — resume is read, not configured). `@media print` always forces the light palette regardless of scheme, since the page exists to be printed/PDF'd.
 
 ## Typography
 
-| Role | Font | Weight | Size |
-|---|---|---|---|
-| Display (name) | `Fraunces` | 700 | — |
-| Section label | `Inter`, uppercase, letter-spacing wide | 600 | `text-xs` |
-| Body (prose, main column) | `Inter` | 400 | `text-sm` |
-| Sidebar content (all) | `Inter` | 400 | `text-2xs` |
-| Entry title | `Inter` | 700 | — |
-| Subtitle | `Inter`, italic or navy-500 | 500 | — |
-| Caption/meta | `Inter` | 400 | `text-2xs` (`0.6875rem`) |
+| Role                      | Font                                    | Weight | Size                     |
+| ------------------------- | --------------------------------------- | ------ | ------------------------ |
+| Display (name)            | `Fraunces`                              | 700    | —                        |
+| Section label             | `Inter`, uppercase, letter-spacing wide | 600    | `text-xs`                |
+| Body (prose, main column) | `Inter`                                 | 400    | `text-sm`                |
+| Sidebar content (all)     | `Inter`                                 | 400    | `text-2xs`               |
+| Entry title               | `Inter`                                 | 700    | —                        |
+| Subtitle                  | `Inter`, italic or navy-500             | 500    | —                        |
+| Caption/meta              | `Inter`                                 | 400    | `text-2xs` (`0.6875rem`) |
 
 Google Fonts, loaded via `@fontsource` (self-hosted, no external request at build/print time — matters for a printable page) or a `<link>` in `Layout.astro`. Register as `--font-display` / `--font-sans` in the Tailwind v4 `@theme` block in `global.css`.
 
@@ -68,4 +68,3 @@ Two-column: main column (left, ~65-70% width) + sidebar (right, ~30-35% width).
 ## Spacing
 
 Tailwind default scale (4px base), compact: section gap `mt-4`/`mt-5`, bullet line-height snug (`leading-snug`).
-

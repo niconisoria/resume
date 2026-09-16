@@ -70,15 +70,13 @@ const {
   <div class="pt-4">
     <SectionLabel text="Selected Work" />
     <ul class="mt-2 space-y-1">
-      {
-        selectedWork.map((item) => (
-          <li>
-            <ActionLink href={item.href}>
-              <span class="text-2xs">{item.label}</span>
-            </ActionLink>
-          </li>
-        ))
-      }
+      {selectedWork.map((item) => (
+        <li>
+          <ActionLink href={item.href}>
+            <span class="text-2xs">{item.label}</span>
+          </ActionLink>
+        </li>
+      ))}
     </ul>
   </div>
 </aside>

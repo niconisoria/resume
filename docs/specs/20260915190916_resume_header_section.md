@@ -17,6 +17,7 @@ Constraints: Must hold design-system.md palette (navy-900 name, navy-700 links) 
 As visitor, want name + contact/action-link row at top, so reach out or check profiles fast.
 
 AC:
+
 1. name shows large at top, optional subtitle (role/title) directly below it
 2. action-link row: email, LinkedIn, GitHub, PDF export, booking link — each an icon with its visible label, no phone number anywhere
 3. every action link's accessible name comes from its own visible label (no separate aria-label to keep in sync)
@@ -58,4 +59,3 @@ output: none (side effects only — external nav; `#` links are no-op placeholde
 ## Summary
 
 Built `Header.astro` (name, optional subtitle, action-link row, separator) and `ActionLink.astro` (one icon+label link, generic inert-placeholder rule). Inert/external behavior keys off `href` prefix (`http` → new tab, else inert) instead of icon type, so any future placeholder link stays safe by default, not just PDF. Icons carry visible labels as their accessible name (`aria-hidden` on the SVG) instead of a separate `aria-label`. `Layout.astro` gained page padding, background, and Fraunces loading; `Welcome.astro` removed as dead code.
-
