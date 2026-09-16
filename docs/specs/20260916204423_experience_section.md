@@ -17,6 +17,7 @@ Related: [Resume Sidebar](20260915211421_resume_sidebar.md)
 As visitor, want see work history, so judge candidate fit fast.
 
 AC:
+
 1. each job shows title, company, start-end dates
 2. each job shows bullet list of achievements
 3. each job shows tech stack tags, below achievements

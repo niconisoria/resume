@@ -3,7 +3,6 @@ import { describe, expect, it } from "vitest";
 import Sidebar from "./Sidebar.astro";
 
 const props = {
-  summary: "Software Engineer with 7+ years of experience.",
   languages: {
     caption: "Commercial experience / years",
     items: [
@@ -44,10 +43,9 @@ async function render() {
 }
 
 describe("Sidebar", () => {
-  it("renders all 6 sections in order", async () => {
+  it("renders all 5 sections in order", async () => {
     const html = await render();
     const order = [
-      "Summary",
       "Education",
       "Certificates",
       "Languages",
@@ -66,15 +64,6 @@ describe("Sidebar", () => {
     expect(html).toContain("2020");
     expect(html).toContain("Anthropic — Introduction to agent skills");
     expect(html).toContain("Anthropic — Introduction to subagents");
-  });
-
-  it("renders the summary paragraph, no icons or lists in that block", async () => {
-    const html = await render();
-    const summaryIndex = html.indexOf("Summary");
-    const educationIndex = html.indexOf("Education");
-    const summaryBlock = html.slice(summaryIndex, educationIndex);
-    expect(summaryBlock).toContain(props.summary);
-    expect(summaryBlock).not.toContain("<svg");
   });
 
   it("renders languages and frameworks with their own captions", async () => {
@@ -111,17 +100,27 @@ describe("Sidebar", () => {
     expect(placeholderAnchor).not.toContain('target="_blank"');
   });
 
-  it("applies the sidebar tint/divider treatment", async () => {
+  it("applies the sidebar tint and section spacing", async () => {
     const html = await render();
     expect(html).toMatch(/class="[^"]*bg-navy-100[^"]*"/);
-    expect(html).toMatch(/class="[^"]*divide-navy-200[^"]*"/);
+    expect(html).toMatch(/class="[^"]*space-y-6[^"]*"/);
   });
 
   it("is driven entirely by props, not hardcoded", async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Sidebar, {
-      props: { ...props, summary: "A different summary entirely." },
+      props: {
+        ...props,
+        education: [
+          {
+            degree: "A different degree entirely",
+            institution: "A different school",
+            startDate: "1999",
+            endDate: "2003",
+          },
+        ],
+      },
     });
-    expect(html).toContain("A different summary entirely.");
+    expect(html).toContain("A different degree entirely");
   });
 });

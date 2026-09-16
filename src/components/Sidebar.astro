@@ -18,7 +18,6 @@ interface EducationEntry {
 }
 
 interface Props {
-  summary: string;
   languages: SkillGroup;
   frameworks: SkillGroup;
   education: EducationEntry[];
@@ -26,32 +25,22 @@ interface Props {
   selectedWork: { label: string; href: string }[];
 }
 
-const {
-  summary,
-  languages,
-  frameworks,
-  education,
-  certificates,
-  selectedWork,
-} = Astro.props;
+const { languages, frameworks, education, certificates, selectedWork } =
+  Astro.props;
 ---
 
-<aside class="rounded-md bg-navy-100 p-4 divide-y divide-navy-200">
-  <div class="pb-4">
-    <SectionLabel text="Summary" />
-    <p class="mt-2 text-2xs text-ink-900">{summary}</p>
-  </div>
-  <div class="py-4">
+<aside class="space-y-6 rounded-md bg-navy-100 p-4">
+  <div>
     <Education items={education} />
   </div>
-  <div class="py-4">
+  <div>
     <SkillList
       label="Certificates"
       caption={certificates.caption}
       items={certificates.items}
     />
   </div>
-  <div class="py-4">
+  <div>
     <SkillList
       label="Languages"
       caption={languages.caption}
@@ -59,7 +48,7 @@ const {
       secondary={languages.secondary}
     />
   </div>
-  <div class="py-4">
+  <div>
     <SkillList
       label="Frameworks"
       caption={frameworks.caption}
@@ -67,9 +56,9 @@ const {
       secondary={frameworks.secondary}
     />
   </div>
-  <div class="pt-4">
+  <div>
     <SectionLabel text="Selected Work" />
-    <ul class="mt-2 space-y-1">
+    <ul class="mt-1 space-y-1">
       {selectedWork.map((item) => (
         <li>
           <ActionLink href={item.href}>

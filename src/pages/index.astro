@@ -2,6 +2,7 @@
 import Experience from "../components/Experience.astro";
 import Header from "../components/Header.astro";
 import Projects from "../components/Projects.astro";
+import SectionLabel from "../components/SectionLabel.astro";
 import Sidebar from "../components/Sidebar.astro";
 import Layout from "../layouts/Layout.astro";
 ---
@@ -31,8 +32,18 @@ import Layout from "../layouts/Layout.astro";
     ]}
   />
   <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[2fr_1fr]">
-    <main class="divide-y divide-navy-100">
-      <div class="pb-6">
+    <main>
+      <div>
+        <SectionLabel text="Summary" />
+        <p class="mt-2 text-sm text-ink-900">
+          Software Engineer with over 7 years of experience building and
+          improving large-scale systems in fintech, edtech, and hrtech. Deep
+          specialization in Ruby/Rails, with working breadth across JavaScript,
+          Python, and PHP.
+        </p>
+      </div>
+      <hr class="mx-auto my-6 w-24 border-t border-wood-500" />
+      <div>
         <Experience
           jobs={[
             {
@@ -50,7 +61,8 @@ import Layout from "../layouts/Layout.astro";
           ]}
         />
       </div>
-      <div class="pt-6">
+      <hr class="mx-auto my-6 w-24 border-t border-wood-500" />
+      <div>
         <Projects
           items={[
             {
@@ -66,7 +78,6 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </main>
     <Sidebar
-      summary="Software Engineer with over 7 years of experience building and improving large-scale systems in fintech, edtech, and hrtech. Deep specialization in Ruby/Rails, with working breadth across JavaScript, Python, and PHP."
       certificates={{
         items: [{ label: "Claude with the Anthropic API", href: "#" }],
       }}

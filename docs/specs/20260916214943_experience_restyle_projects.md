@@ -17,6 +17,7 @@ Related: [Experience Section](20260916204423_experience_section.md)
 As visitor, want experience styled like final design plus a projects section, so page reads polished and shows side work too.
 
 AC:
+
 1. each job entry: title+company stacked left, location+dates stacked right, same row
 2. achievement bullets show as dash-prefixed lines, not disc list
 3. bullets support bold inline emphasis on key results

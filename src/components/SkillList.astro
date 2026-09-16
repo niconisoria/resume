@@ -15,7 +15,7 @@ const { label, caption, items, secondary } = Astro.props;
 <div>
   <SectionLabel text={label} />
   {caption && <p class="mt-1 text-2xs text-ink-500">{caption}</p>}
-  <div class="mt-2 space-y-1">
+  <div class={caption ? "mt-2 space-y-1" : "mt-1 space-y-1"}>
     {items.map((item) =>
       item.href ? (
         <ActionLink href={item.href}>

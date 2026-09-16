@@ -4,31 +4,32 @@
 
 Palette inspired by a Strandberg guitar's blue-burst flame top: deep sapphire at the edges fading to a lighter cyan-blue center, near-black ebony/hardware, white trim.
 
-| Token      | Hex       | Use                                                                                                                                      |
-| ---------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `navy-900` | `#0A2A46` | Name/display heading text                                                                                                                |
-| `navy-700` | `#1B63A6` | Section labels, links                                                                                                                    |
-| `navy-500` | `#4FA3DC` | Subtitles, hover state                                                                                                                   |
-| `navy-100` | `#E3F0FB` | Divider rule under name, subtle backgrounds                                                                                              |
-| `navy-200` | `#C9DFF2` | Sidebar divider rule — `navy-100` is the sidebar's own background, so its divider needs a step darker to actually show                   |
-| `ink-900`  | `#141414` | Body text                                                                                                                                |
-| `ink-500`  | `#5C5C5C` | Secondary text (dates, environment lines)                                                                                                |
-| `paper`    | `#FCFAF6` | Page background — warm off-white, not pure white                                                                                         |
-| `wood-500` | `#C9975A` | Secondary accent (guitar neck) — spent sparingly: name-underline rule, bullet dash marker. Never a second primary accent alongside blue. |
+| Token      | Hex       | Use                                                                                                                                                                                                                                                                                       |
+| ---------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `navy-900` | `#0A2A46` | Name/display heading text                                                                                                                                                                                                                                                                 |
+| `navy-700` | `#1B63A6` | Section labels, links, entry subtitles (company/project) — any text usage needs this shade, not `navy-500`                                                                                                                                                                                |
+| `navy-500` | `#4FA3DC` | Large-scale/non-text accents only (hover backgrounds, decorative fills) — fails WCAG AA text contrast against `paper` (~2.65:1), never use for text                                                                                                                                       |
+| `navy-100` | `#E3F0FB` | Divider rule under name, subtle backgrounds                                                                                                                                                                                                                                               |
+| `navy-200` | `#C9DFF2` | `ActionLink` underline, `ThemeToggle` border — sidebar itself uses plain spacing between sections now, not a divider rule                                                                                                                                                                 |
+| `ink-900`  | `#141414` | Body text                                                                                                                                                                                                                                                                                 |
+| `ink-500`  | `#5C5C5C` | Secondary text (dates, environment lines)                                                                                                                                                                                                                                                 |
+| `paper`    | `#FCFAF6` | Page background — warm off-white, not pure white                                                                                                                                                                                                                                          |
+| `wood-500` | `#D9AE7A` | Secondary accent (guitar neck), lightened for a subtler touch now that it's used for section/column divider rules too: name-underline rule, bullet dash marker, section/column divider rules. Never a second primary _fill/text_ accent alongside blue — stays confined to rules/markers. |
 
 Tailwind: register as `theme.colors.navy` / `theme.colors.ink` scale (v4 `@theme` block in `global.css`).
 
 ### Dark mode (screen only)
 
-| Token                    | Hex       | Use                                                                                                 |
-| ------------------------ | --------- | --------------------------------------------------------------------------------------------------- |
-| `paper-dark`             | `#0D1116` | Page background                                                                                     |
-| `navy-900-dark`          | `#DCEEFB` | Name/display heading text — must be redefined here, `navy-900` alone is unreadable on a dark ground |
-| `navy-100-dark`          | `#142A42` | Divider rule, sidebar tint                                                                          |
-| `navy-200-dark`          | `#25456B` | Sidebar divider rule (same reasoning as light mode)                                                 |
-| `navy-500-dark` (accent) | `#6FB6E8` | Section labels, links, subtitles — lightened for contrast on dark bg                                |
-| `ink-900-dark`           | `#EDEDED` | Body text                                                                                           |
-| `ink-500-dark`           | `#9AA3AE` | Secondary text                                                                                      |
+| Token                    | Hex       | Use                                                                                                                                                                                                                                                                                                                    |
+| ------------------------ | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `paper-dark`             | `#0D1116` | Page background                                                                                                                                                                                                                                                                                                        |
+| `navy-900-dark`          | `#DCEEFB` | Name/display heading text — must be redefined here, `navy-900` alone is unreadable on a dark ground                                                                                                                                                                                                                    |
+| `navy-100-dark`          | `#1B3A5C` | Sidebar tint — bumped lighter than a straight dark-scale-down so the panel reads as a distinct block against `paper-dark`'s near-black, not a floating disconnected card                                                                                                                                               |
+| `navy-200-dark`          | `#5A93C4` | `ActionLink` underline, `ThemeToggle` border — brightened from a straight dark-scale-down (`#25456B`) which was originally the sidebar's divider rule and nearly invisible against `navy-100-dark`; sidebar has since dropped dividers for plain spacing, but the token stayed bright since the other two uses need it |
+| `navy-500-dark` (accent) | `#6FB6E8` | Section labels, links, subtitles — lightened for contrast on dark bg                                                                                                                                                                                                                                                   |
+| `ink-900-dark`           | `#EDEDED` | Body text                                                                                                                                                                                                                                                                                                              |
+| `ink-500-dark`           | `#9AA3AE` | Secondary text                                                                                                                                                                                                                                                                                                         |
+| `wood-500-dark`          | `#ECC79C` | Divider rules, bullet dash marker — lighter/warmer than light-mode `wood-500` so thin 1px rules keep visual presence against `paper-dark`'s near-black                                                                                                                                                                 |
 
 Defaults to `prefers-color-scheme: dark`, overridable via a fixed corner toggle button; choice persists in `localStorage`. `@media print` always forces the light palette regardless of scheme/toggle, since the page exists to be printed/PDF'd.
 
@@ -41,14 +42,14 @@ Defaults to `prefers-color-scheme: dark`, overridable via a fixed corner toggle 
 | Body (prose, main column) | `Inter`                                 | 400    | `text-sm`                |
 | Sidebar content (all)     | `Inter`                                 | 400    | `text-2xs`               |
 | Entry title               | `Inter`                                 | 700    | —                        |
-| Subtitle                  | `Inter`, italic or navy-500             | 500    | —                        |
+| Subtitle                  | `Inter`, italic or navy-700             | 500    | —                        |
 | Caption/meta              | `Inter`                                 | 400    | `text-2xs` (`0.6875rem`) |
 
 Google Fonts, loaded via `@fontsource` (self-hosted, no external request at build/print time — matters for a printable page) or a `<link>` in `Layout.astro`. Register as `--font-display` / `--font-sans` in the Tailwind v4 `@theme` block in `global.css`.
 
 `text-2xs` is a registered token (`@theme` in `global.css`), not an arbitrary value.
 
-Section label stays compact (`text-xs`) — distinguished from what's under it by weight/case/color (bold, uppercase, `navy-700`), not by being the biggest thing in the section. Everything inside the sidebar (Summary paragraph included) is `text-2xs` — the sidebar is scannable reference material, not reading prose. Content pieces are distinguished from each other by color/style (plain `ink-900` vs italic `navy-500` vs link `navy-700`), not by size. Only the main column's flowing prose (Entry bullets, once built) stays at Body's `text-sm`.
+Section label stays compact (`text-xs`) — distinguished from what's under it by weight/case/color (bold, uppercase, `navy-700`), not by being the biggest thing in the section. Everything inside the sidebar (Summary paragraph included) is `text-2xs` — the sidebar is scannable reference material, not reading prose. Content pieces are distinguished from each other by color/style (plain `ink-900` vs `navy-700` subtitle vs underlined `navy-700` link — link and subtitle share a color, so the underline is what marks a link), not by size. Only the main column's flowing prose (Entry bullets, once built) stays at Body's `text-sm`.
 
 ## Layout
 
@@ -59,8 +60,9 @@ Two-column: main column (left, ~65-70% width) + sidebar (right, ~30-35% width).
 - Name + contact row span full width, header above both columns. Thin `wood-500` rule beneath — the one warm accent against the otherwise all-blue palette.
 - Main column: narrative/detail sections.
 - Sidebar column: short/scannable highlight sections, `navy-100` background tint to visually separate from main column.
-- Section labels: uppercase, `navy-700`, small-caps feel, margin-top small / margin-bottom tight, thin divider rule above (except the first section in each column) — `navy-100` in the main column, `navy-200` in the sidebar (the sidebar's background already is `navy-100`).
-- Entry header: title (bold, `ink-900`) + subtitle (company/project, `navy-500`, one line below) on the left; location + date range right-aligned on the same two lines.
+- Section labels: uppercase, `navy-700`, small-caps feel, margin-top small / margin-bottom tight. Main column: thin `wood-500` divider rule above (except the first section). Sidebar: plain `space-y-6` between sections instead — a divider rule read as too heavy/cluttered at 5 back-to-back sections in a narrow column.
+- Links (`ActionLink`): always underlined (`decoration-navy-200`, `hover:decoration-navy-700`) — color alone doesn't survive print/grayscale, so links must stay visually distinct from plain colored text (e.g. entry subtitle/company in `navy-700`) by more than hue.
+- Entry header: title (bold, `ink-900`) + subtitle (company/project, `navy-700`, one line below) on the left; location + date range right-aligned on the same two lines.
 - Bullets: `—` (em dash) marker in `wood-500`, one per paragraph, not `•`. Bold inline spans (`ink-900` on `font-semibold`) call out the key result within a bullet.
 - Stack line: trailing italic line per entry, separated from the bullets above with extra top margin (not flush against the last bullet), `ink-500` label ("Stack:") + comma-separated list, `ink-500`.
 - Sidebar skill items: plain text, label + optional `/ Nyrs` suffix; no pill/badge treatment. Secondary/exploratory skills can be dot-separated on one line.
