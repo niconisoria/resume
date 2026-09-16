@@ -30,7 +30,7 @@ Tailwind: register as `theme.colors.navy` / `theme.colors.ink` scale (v4 `@theme
 | `ink-900-dark`           | `#EDEDED` | Body text                                                                                           |
 | `ink-500-dark`           | `#9AA3AE` | Secondary text                                                                                      |
 
-Driven by `prefers-color-scheme: dark` (no toggle needed — resume is read, not configured). `@media print` always forces the light palette regardless of scheme, since the page exists to be printed/PDF'd.
+Defaults to `prefers-color-scheme: dark`, overridable via a fixed corner toggle button; choice persists in `localStorage`. `@media print` always forces the light palette regardless of scheme/toggle, since the page exists to be printed/PDF'd.
 
 ## Typography
 
