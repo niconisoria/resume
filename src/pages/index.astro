@@ -36,10 +36,10 @@ import Layout from "../layouts/Layout.astro";
       <div>
         <SectionLabel text="Summary" />
         <p class="mt-2 text-sm text-ink-900">
-          Software Engineer with over 7 years of experience building and
-          improving large-scale systems in fintech, edtech, and hrtech. Deep
-          specialization in Ruby/Rails, with working breadth across JavaScript,
-          Python, and PHP.
+          Placeholder software engineer with a made-up number of years across
+          fake industries, used only to stress-test layout and print/PDF output
+          — not a real bio. Lorem ipsum dolor sit amet, consectetur adipiscing
+          elit, sed do eiusmod tempor incididunt.
         </p>
       </div>
       <hr class="mx-auto my-6 w-24 border-t border-wood-500" />
@@ -47,16 +47,91 @@ import Layout from "../layouts/Layout.astro";
         <Experience
           jobs={[
             {
-              title: "Senior Software Engineer",
-              company: "Acme Corp",
+              title: "Staff Software Engineer",
+              company: "Nimbus Systems",
               location: "Remote",
-              startDate: "2022-01",
+              startDate: "2023",
               endDate: "Present",
               achievements: [
-                "Led migration to microservices",
-                "Cut p99 latency by 40%",
+                "Shipped a fake real-time dashboard feature, supporting **thousands of test users**",
+                "Led a made-up modernization effort improving imaginary system stability",
+                "Coordinated a fictional cross-team migration across three placeholder services",
+                "Wrote sample ETL pipelines connecting dummy data sources for layout testing",
               ],
-              stack: ["Ruby", "Rails", "React"],
+              stack: [
+                "Kotlin 1.9",
+                "Spring Boot 3",
+                "PostgreSQL",
+                "Redis",
+                "Kafka",
+                "React",
+                "JUnit",
+                "Detekt",
+              ],
+            },
+            {
+              title: "Software Engineer",
+              company: "Lattice Works",
+              location: "Hybrid",
+              startDate: "2021-03",
+              endDate: "2023-01",
+              achievements: [
+                "Built a placeholder permission system with a flexible fake UI",
+                "Implemented dummy templates with custom components and mock API endpoints",
+                "Prototyped a fictional real-time chat system for sample stakeholders",
+                "Refactored sample modules and established **fabricated test coverage**",
+              ],
+              stack: [
+                "TypeScript 4.9/5.2",
+                "Next.js 12/14",
+                "PostgreSQL",
+                "MySQL",
+                "Redis",
+                "GraphQL",
+                "Prisma",
+                "Vue",
+                "tRPC",
+                "Vitest",
+                "Playwright",
+                "Cypress",
+                "ESLint",
+                "Biome",
+              ],
+            },
+            {
+              title: "Software Engineer",
+              company: "BluePeak Digital",
+              location: "Onsite",
+              startDate: "2019-06",
+              endDate: "2021-03",
+              achievements: [
+                "Built placeholder CMS features for a fake multi-tenant demo app",
+                "Integrated mock third-party systems for sample retail operations",
+                "Refactored sample legacy code and expanded fake test coverage",
+              ],
+              stack: [
+                "Java 11",
+                "Spring 5",
+                "MySQL",
+                "Redis",
+                "RabbitMQ",
+                "Hibernate",
+                "jQuery",
+                "JUnit",
+                "Checkstyle",
+              ],
+            },
+            {
+              title: "Junior Software Engineer",
+              company: "Forge Analytics",
+              location: "Onsite",
+              startDate: "2018-01",
+              endDate: "2019-06",
+              achievements: [
+                "Contributed to fake greenfield backend services and sample data workflows",
+                "Participated in placeholder architecture discussions on toy features",
+              ],
+              stack: ["Python", "Go", "Ruby", "SQLite", "MongoDB", "Celery"],
             },
           ]}
         />
@@ -66,12 +141,13 @@ import Layout from "../layouts/Layout.astro";
         <Projects
           items={[
             {
-              title: "SCIM Bridge",
+              title: "Task Flow CLI",
               achievements: [
-                "Python/FastAPI service translating Okta SCIM 2.0 requests into Brivo Access API calls",
-                "Saga-based orchestrator with **automatic rollback**",
+                "Built a fake Go CLI translating dummy webhook requests into mock task-queue jobs, for **rate limits and partial failures** testing",
+                "Designed a placeholder saga-based orchestrator with **automatic rollback** for sample multi-step operations",
+                "Implemented mock ID mapping and idempotency locks to prevent duplicate sample records",
               ],
-              stack: ["Python", "FastAPI", "Redis", "Docker", "Pytest"],
+              stack: ["Go 1.22", "SQLite", "Docker", "Testify"],
             },
           ]}
         />
@@ -79,45 +155,50 @@ import Layout from "../layouts/Layout.astro";
     </main>
     <Sidebar
       certificates={{
-        items: [{ label: "Claude with the Anthropic API", href: "#" }],
+        items: [
+          { label: "Placeholder Cert — Cloud Fundamentals", href: "#" },
+          { label: "Placeholder Cert — Distributed Systems", href: "#" },
+          { label: "Placeholder Cert — Security Basics", href: "#" },
+          { label: "Placeholder Cert — Agile Delivery", href: "#" },
+        ],
       }}
       education={[
         {
-          degree: "MSc Systems Engineering",
-          institution: "Universidad Tecnológica Nacional",
-          startDate: "2015",
-          endDate: "2020",
+          degree: "MSc Placeholder Engineering",
+          institution: "Sample State University",
+          startDate: "2014",
+          endDate: "2018",
         },
       ]}
       languages={{
-        caption: "Commercial experience / years",
+        caption: "Primary languages",
         items: [
-          { label: "Ruby", years: 7 },
-          { label: "JavaScript/TypeScript", years: 7 },
-          { label: "Python", years: 3 },
-          { label: "PHP", years: 5 },
+          { label: "TypeScript" },
+          { label: "Kotlin" },
+          { label: "Go" },
+          { label: "Java" },
         ],
         secondary: {
           caption: "Side-project / Fast ramp-up",
-          items: ["Rust", "Go"],
+          items: ["Rust", "Elixir"],
         },
       }}
       frameworks={{
-        caption: "Production use / years",
+        caption: "Primary frameworks",
         items: [
-          { label: "Rails", years: 7 },
-          { label: "React", years: 6 },
-          { label: "FastAPI", years: 1 },
+          { label: "Next.js" },
+          { label: "Spring Boot" },
+          { label: "React" },
         ],
         secondary: {
-          caption: "Side-project / Fast ramp-up",
-          items: ["Astro", "Flask"],
+          caption: "Also",
+          items: ["GraphQL", "Prisma", "Hibernate", "RabbitMQ", "gRPC"],
         },
       }}
       selectedWork={[
         {
-          label: "SCIM Bridge",
-          href: "https://github.com/niconisoria/scim-bridge",
+          label: "Task Flow CLI",
+          href: "#",
         },
       ]}
     />
