@@ -1,10 +1,11 @@
 ---
 interface Props {
   href: string;
+  newTab?: boolean;
 }
 
-const { href } = Astro.props;
-const isExternal = href.startsWith("http");
+const { href, newTab } = Astro.props;
+const isExternal = newTab ?? href.startsWith("http");
 ---
 
 <a

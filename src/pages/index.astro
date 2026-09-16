@@ -4,7 +4,11 @@ import Header from "../components/Header.astro";
 import Projects from "../components/Projects.astro";
 import SectionLabel from "../components/SectionLabel.astro";
 import Sidebar from "../components/Sidebar.astro";
+import { withBase } from "../lib/base";
 import Layout from "../layouts/Layout.astro";
+
+const pdfHref = new URL(withBase("nicolas-nisoria.pdf"), import.meta.env.SITE)
+  .href;
 ---
 
 <Layout>
@@ -28,10 +32,15 @@ import Layout from "../layouts/Layout.astro";
         icon: "github",
       },
       { label: "Book a call", href: "#", icon: "booking" },
-      { label: "Download PDF", href: "#", icon: "pdf" },
+      {
+        label: "Download PDF",
+        href: pdfHref,
+        icon: "pdf",
+        newTab: true,
+      },
     ]}
   />
-  <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[2fr_1fr]">
+  <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[2fr_1fr] print:grid-cols-[2fr_1fr]">
     <main>
       <div>
         <SectionLabel text="Summary" />

@@ -39,6 +39,23 @@
   --color-paper: #0d1116;
 }
 
+@media print {
+  :root {
+    --color-navy-900: #0a2a46 !important;
+    --color-navy-700: #1b63a6 !important;
+    --color-navy-500: #4fa3dc !important;
+    --color-navy-200: #c9dff2 !important;
+    --color-navy-100: #e3f0fb !important;
+    --color-ink-900: #141414 !important;
+    --color-ink-500: #5c5c5c !important;
+    --color-paper: #fcfaf6 !important;
+  }
+
+  body {
+    background: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   *,
   *::before,
