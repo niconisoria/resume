@@ -1,0 +1,45 @@
+---
+import SectionLabel from "./SectionLabel.astro";
+
+interface Job {
+  title: string;
+  company: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  achievements: string[];
+  stack: string[];
+}
+
+interface Props {
+  jobs: Job[];
+}
+
+const { jobs } = Astro.props;
+---
+
+<section>
+  <SectionLabel text="Experience" />
+  <div class="mt-3 space-y-6">
+    {jobs.map((job) => (
+      <div>
+        <div class="flex items-baseline justify-between gap-4">
+          <span class="text-sm font-bold text-ink-900">{job.title}</span>
+          <span class="text-2xs text-ink-500">{job.location}</span>
+        </div>
+        <div class="flex items-baseline justify-between gap-4">
+          <span class="text-2xs font-bold text-navy-500">{job.company}</span>
+          <span class="text-2xs text-ink-500">
+            {job.startDate} – {job.endDate}
+          </span>
+        </div>
+        <ul class="mt-2 list-disc space-y-1 pl-4">
+          {job.achievements.map((achievement) => (
+            <li class="text-sm text-ink-900">{achievement}</li>
+          ))}
+        </ul>
+        <p class="mt-2 text-2xs text-ink-500">{job.stack.join(" · ")}</p>
+      </div>
+    ))}
+  </div>
+</section>

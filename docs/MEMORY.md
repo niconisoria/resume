@@ -1,2 +1,3 @@
 - inert placeholder links: keyed off `href` prefix (`http` → new tab + rel, else inert) instead of icon type, so any future placeholder link stays safe by default, not just the ones special-cased.
 - decorative icons paired with a visible label: give the `<svg>` `aria-hidden="true" focusable="false"`, so screen readers read only the visible label, never an untitled graphic alongside it.
+- experience ordering: `Experience.astro` doesn't sort jobs, renders array as given — caller (index.astro) owns newest-first order. Matches Sidebar/Education's caller-owns-order convention, avoids duplicating sort policy inside the component.
