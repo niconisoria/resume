@@ -1,4 +1,5 @@
 ---
+import EntryBody from "./EntryBody.astro";
 import SectionLabel from "./SectionLabel.astro";
 
 interface Job {
@@ -24,21 +25,18 @@ const { jobs } = Astro.props;
     {jobs.map((job) => (
       <div>
         <div class="flex items-baseline justify-between gap-4">
-          <span class="text-sm font-bold text-ink-900">{job.title}</span>
-          <span class="text-2xs text-ink-500">{job.location}</span>
+          <div>
+            <div class="text-sm font-bold text-ink-900">{job.title}</div>
+            <div class="text-2xs font-medium text-navy-500">{job.company}</div>
+          </div>
+          <div class="text-right text-2xs text-ink-500">
+            <div>{job.location}</div>
+            <div>
+              {job.startDate} – {job.endDate}
+            </div>
+          </div>
         </div>
-        <div class="flex items-baseline justify-between gap-4">
-          <span class="text-2xs font-bold text-navy-500">{job.company}</span>
-          <span class="text-2xs text-ink-500">
-            {job.startDate} – {job.endDate}
-          </span>
-        </div>
-        <ul class="mt-2 list-disc space-y-1 pl-4">
-          {job.achievements.map((achievement) => (
-            <li class="text-sm text-ink-900">{achievement}</li>
-          ))}
-        </ul>
-        <p class="mt-2 text-2xs text-ink-500">{job.stack.join(" · ")}</p>
+        <EntryBody achievements={job.achievements} stack={job.stack} />
       </div>
     ))}
   </div>

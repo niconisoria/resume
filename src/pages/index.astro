@@ -1,6 +1,7 @@
 ---
 import Experience from "../components/Experience.astro";
 import Header from "../components/Header.astro";
+import Projects from "../components/Projects.astro";
 import Sidebar from "../components/Sidebar.astro";
 import Layout from "../layouts/Layout.astro";
 ---
@@ -30,23 +31,39 @@ import Layout from "../layouts/Layout.astro";
     ]}
   />
   <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[2fr_1fr]">
-    <main>
-      <Experience
-        jobs={[
-          {
-            title: "Senior Software Engineer",
-            company: "Acme Corp",
-            location: "Remote",
-            startDate: "2022-01",
-            endDate: "Present",
-            achievements: [
-              "Led migration to microservices",
-              "Cut p99 latency by 40%",
-            ],
-            stack: ["Ruby", "Rails", "React"],
-          },
-        ]}
-      />
+    <main class="divide-y divide-navy-100">
+      <div class="pb-6">
+        <Experience
+          jobs={[
+            {
+              title: "Senior Software Engineer",
+              company: "Acme Corp",
+              location: "Remote",
+              startDate: "2022-01",
+              endDate: "Present",
+              achievements: [
+                "Led migration to microservices",
+                "Cut p99 latency by 40%",
+              ],
+              stack: ["Ruby", "Rails", "React"],
+            },
+          ]}
+        />
+      </div>
+      <div class="pt-6">
+        <Projects
+          items={[
+            {
+              title: "SCIM Bridge",
+              achievements: [
+                "Python/FastAPI service translating Okta SCIM 2.0 requests into Brivo Access API calls",
+                "Saga-based orchestrator with **automatic rollback**",
+              ],
+              stack: ["Python", "FastAPI", "Redis", "Docker", "Pytest"],
+            },
+          ]}
+        />
+      </div>
     </main>
     <Sidebar
       summary="Software Engineer with over 7 years of experience building and improving large-scale systems in fintech, edtech, and hrtech. Deep specialization in Ruby/Rails, with working breadth across JavaScript, Python, and PHP."

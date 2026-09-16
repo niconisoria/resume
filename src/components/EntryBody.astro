@@ -1,0 +1,20 @@
+---
+import { renderBullet } from "./bullet";
+
+interface Props {
+  achievements: string[];
+  stack: string[];
+}
+
+const { achievements, stack } = Astro.props;
+---
+
+<div class="mt-2 space-y-1">
+  {achievements.map((achievement) => (
+    <p class="text-sm text-ink-900">
+      <span class="font-semibold text-wood-500">— </span>
+      <span set:html={renderBullet(achievement)} />
+    </p>
+  ))}
+</div>
+<p class="mt-2.5 text-2xs text-ink-500 italic">Stack: {stack.join(", ")}</p>

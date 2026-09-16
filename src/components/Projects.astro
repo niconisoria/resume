@@ -1,0 +1,28 @@
+---
+import EntryBody from "./EntryBody.astro";
+import SectionLabel from "./SectionLabel.astro";
+
+interface Project {
+  title: string;
+  achievements: string[];
+  stack: string[];
+}
+
+interface Props {
+  items: Project[];
+}
+
+const { items } = Astro.props;
+---
+
+<section>
+  <SectionLabel text="Personal Projects" />
+  <div class="mt-3 space-y-6">
+    {items.map((item) => (
+      <div>
+        <div class="text-sm font-bold text-ink-900">{item.title}</div>
+        <EntryBody achievements={item.achievements} stack={item.stack} />
+      </div>
+    ))}
+  </div>
+</section>

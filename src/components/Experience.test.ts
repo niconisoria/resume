@@ -9,7 +9,10 @@ const jobs = [
     location: "Remote",
     startDate: "2022-01",
     endDate: "Present",
-    achievements: ["Led migration to microservices", "Cut latency by 40%"],
+    achievements: [
+      "Led migration to microservices",
+      "Cut **p99 latency** by 40%",
+    ],
     stack: ["Ruby", "Rails", "React"],
   },
   {
@@ -39,27 +42,44 @@ describe("Experience", () => {
     expect(html).toContain("Present");
   });
 
-  it("renders achievement bullets", async () => {
+  it("splits entry-head: title+company left, location+dates right", async () => {
     const html = await render();
-    expect(html).toContain("Led migration to microservices");
-    expect(html).toContain("Cut latency by 40%");
+    const titleIdx = html.indexOf("Senior Software Engineer");
+    const companyIdx = html.indexOf("Acme Corp");
+    const locationIdx = html.indexOf("Remote");
+    const datesIdx = html.indexOf("2022-01");
+    expect(companyIdx).toBeGreaterThan(titleIdx);
+    expect(datesIdx).toBeGreaterThan(locationIdx);
   });
 
-  it("bolds title and company", async () => {
+  it("does not bold company (medium weight only)", async () => {
     const html = await render();
-    const titleMatch =
-      html.match(/<[^>]*>Senior Software Engineer<\/[^>]*>/)?.[0] ?? "";
     const companyMatch = html.match(/<[^>]*>Acme Corp<\/[^>]*>/)?.[0] ?? "";
-    expect(titleMatch).toContain("font-bold");
-    expect(companyMatch).toContain("font-bold");
+    expect(companyMatch).not.toContain("font-bold");
+    expect(companyMatch).toContain("font-medium");
   });
 
-  it("renders stack tags after achievements", async () => {
+  it("renders achievement bullets as dash-prefixed paragraphs, not a list", async () => {
     const html = await render();
-    const achievementsIdx = html.indexOf("Cut latency by 40%");
+    expect(html).not.toContain("<ul");
+    expect(html).not.toContain("<li");
+    expect(html).toContain("Led migration to microservices");
+    expect(html).toContain("Built payments pipeline");
+  });
+
+  it("supports bold inline emphasis inside bullets", async () => {
+    const html = await render();
+    expect(html).toContain("<b>p99 latency</b>");
+  });
+
+  it("renders stack tags after achievements, extra spacing, italic", async () => {
+    const html = await render();
+    const achievementsIdx = html.indexOf("p99 latency");
     const stackIdx = html.indexOf("Ruby");
     expect(stackIdx).toBeGreaterThan(achievementsIdx);
     expect(html).toContain("React");
+    const stackMatch = html.match(/<p[^>]*>Stack:[^<]*Ruby[\s\S]*?<\/p>/)?.[0];
+    expect(stackMatch).toContain("italic");
   });
 
   it("renders jobs in the order given (newest first)", async () => {
