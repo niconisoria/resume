@@ -2,25 +2,27 @@
 
 ## Components
 
-Component breakdown for the resume page (React/Astro):
+Component breakdown for the resume page (Astro, no React islands in use):
 
-- `Header` — name, contact row.
-- `SectionLabel` — uppercase section heading.
-- `Sidebar` — right column wrapper (Layout's sidebar slot); lays out its children (`SkillList`, `PrincipleList`) with the tint/border treatment from `design-system.md`.
-- `Entry` — one experience/project item.
-  - props: `title`, `subtitle` (company/project), `location`, `dateRange`, `bullets` (array, each may contain inline bold spans), `stack` (optional array, rendered as trailing italic "Stack:" line).
-  - layout: title+subtitle left / location+dateRange right-aligned, on the same two lines; bullets below as `—`-prefixed paragraphs, not a `<ul>` (matches non-list dash style).
-- `SkillList` — sidebar skill/cert/education list.
-  - props: `caption` (optional, e.g. "Commercial experience / years"), `items` (array of `{ label, years?: number }`).
-  - `caption` renders once above the items, small/muted, explaining what the list measures.
-  - plain text, no pill/badge treatment; optionally grouped as a single dot-separated line for a "side-project / exploratory" subgroup.
-- `PrincipleList` — labeled list of principles/values, each item optionally an external link.
-- `SelectedWork` — hyperlinked project entries, each tied back to a company/role (`Entry`).
-- `ActionLink` — CTA button (PDF export, calendar booking, external profile link); rendered inline in `Header`.
+- `Layout` — page shell: meta/OG tags, font `<link>`, dark-mode init script (reads `localStorage`/`prefers-color-scheme` before paint), mounts `ThemeToggle`.
+- `Header` — name, subtitle, row of `ActionLink`s (contact/social/CTA icons).
+- `SectionLabel` — section heading. Reused by every section across main column and sidebar.
+- `ActionLink` — generic `<a>` wrapper: external (`http`) links open in a new tab, everything else (`href="#"` placeholders) stays inert.
+- `Experience` — main-column jobs list. Props: `jobs: { title, company, location, startDate, endDate, achievements: string[], stack: string[] }[]`. Caller owns sort order (no internal sorting). Delegates achievements/stack rendering to `EntryBody`.
+- `Projects` — main-column personal-projects list, same shape minus `company`/`location`/dates. Props: `items: { title, achievements: string[], stack: string[] }[]`. Also delegates to `EntryBody`.
+- `EntryBody` — shared achievements+stack markup for `Experience`/`Projects`: dash-prefixed `<p>` bullets (via `renderBullet()`), trailing "Stack:" line.
+- `bullet.ts` — `renderBullet(text)`: HTML-escapes then converts `**bold**` markdown-lite to `<b>`.
+- `Sidebar` — right-column wrapper. Renders `Education`, three `SkillList` instances (Certificates/Languages/Frameworks), and an inline Selected Work list (`ActionLink`s, no separate component).
+- `Education` — degree/institution/date-range entries, supports multiple.
+- `SkillList` — label + optional caption + list of `{ label, years?, href? }` (renders as link via `ActionLink` when `href` present, plain text otherwise) + optional secondary dot-separated line.
+- `ThemeToggle` — fixed top-right icon button, trusts `Layout`'s head script for initial theme, only handles click-to-flip + `localStorage` persistence + label sync.
 
 ## Structural patterns
 
 - Linear single-view page — no tabs, no collapsible/expandable sections.
-- Chronological grouping (`Entry` list ordered most-recent-first) drives Work Experience.
-- Stack tags live at the `Entry` level, not globally.
-- `Header` carries contact info plus a row of `ActionLink`s (social profiles, PDF export, booking link).
+- Main column: Summary → Experience → Projects, in that order. Sidebar: Education → Certificates → Languages → Frameworks → Selected Work.
+- Array order = display order everywhere (`Experience`/`Projects`/`Education` don't sort internally) — caller passes data newest/most-relevant first.
+- Stack tags live at the entry level (`Experience`/`Projects` via `EntryBody`), not globally.
+- Dark mode: CSS custom-property overrides in `global.css`, keyed off `prefers-color-scheme`/`data-theme`, not component-level `dark:` variants.
+
+Colors, typography, spacing, and other visual treatment live in `docs/design-system.md`, not here.

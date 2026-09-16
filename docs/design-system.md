@@ -31,25 +31,27 @@ Tailwind: register as `theme.colors.navy` / `theme.colors.ink` scale (v4 `@theme
 | `ink-500-dark`           | `#9AA3AE` | Secondary text                                                                                                                                                                                                                                                                                                         |
 | `wood-500-dark`          | `#ECC79C` | Divider rules, bullet dash marker — lighter/warmer than light-mode `wood-500` so thin 1px rules keep visual presence against `paper-dark`'s near-black                                                                                                                                                                 |
 
-Defaults to `prefers-color-scheme: dark`, overridable via a fixed corner toggle button; choice persists in `localStorage`. `@media print` always forces the light palette regardless of scheme/toggle, since the page exists to be printed/PDF'd.
+Defaults to `prefers-color-scheme: dark`, overridable via a fixed corner toggle button; choice persists in `localStorage`.
+
+**Not yet implemented:** the page exists to be printed/PDF'd, so printing/exporting while dark mode is active should force the light palette via `@media print` — no such override exists in `global.css` yet, printing currently follows whatever theme is active on screen.
 
 ## Typography
 
-| Role                      | Font                                    | Weight | Size                     |
-| ------------------------- | --------------------------------------- | ------ | ------------------------ |
-| Display (name)            | `Fraunces`                              | 700    | —                        |
-| Section label             | `Inter`, uppercase, letter-spacing wide | 600    | `text-xs`                |
-| Body (prose, main column) | `Inter`                                 | 400    | `text-sm`                |
-| Sidebar content (all)     | `Inter`                                 | 400    | `text-2xs`               |
-| Entry title               | `Inter`                                 | 700    | —                        |
-| Subtitle                  | `Inter`, italic or navy-700             | 500    | —                        |
-| Caption/meta              | `Inter`                                 | 400    | `text-2xs` (`0.6875rem`) |
+| Role                      | Font                                      | Weight | Size                     |
+| ------------------------- | ----------------------------------------- | ------ | ------------------------ |
+| Display (name)            | `Fraunces`                                | 700    | —                        |
+| Section label             | System sans (Tailwind default), uppercase | 600    | `text-xs`                |
+| Body (prose, main column) | System sans                               | 400    | `text-sm`                |
+| Sidebar content (all)     | System sans                               | 400    | `text-2xs`               |
+| Entry title               | System sans                               | 700    | —                        |
+| Subtitle                  | System sans, `navy-700`                   | 500    | —                        |
+| Caption/meta              | System sans                               | 400    | `text-2xs` (`0.6875rem`) |
 
-Google Fonts, loaded via `@fontsource` (self-hosted, no external request at build/print time — matters for a printable page) or a `<link>` in `Layout.astro`. Register as `--font-display` / `--font-sans` in the Tailwind v4 `@theme` block in `global.css`.
+Fraunces is the only loaded web font — plain `<link>` to Google Fonts in `Layout.astro`, applied via Tailwind's arbitrary-value `font-['Fraunces']` class on the name only. Everything else uses Tailwind's default sans stack (`ui-sans-serif, system-ui, ...`) — no Inter, no `@fontsource`, no registered `--font-display`/`--font-sans` theme tokens.
 
 `text-2xs` is a registered token (`@theme` in `global.css`), not an arbitrary value.
 
-Section label stays compact (`text-xs`) — distinguished from what's under it by weight/case/color (bold, uppercase, `navy-700`), not by being the biggest thing in the section. Everything inside the sidebar (Summary paragraph included) is `text-2xs` — the sidebar is scannable reference material, not reading prose. Content pieces are distinguished from each other by color/style (plain `ink-900` vs `navy-700` subtitle vs underlined `navy-700` link — link and subtitle share a color, so the underline is what marks a link), not by size. Only the main column's flowing prose (Entry bullets, once built) stays at Body's `text-sm`.
+Section label stays compact (`text-xs`) — distinguished from what's under it by weight/case/color (bold, uppercase, `navy-700`), not by being the biggest thing in the section. Everything inside the sidebar (Summary paragraph included) is `text-2xs` — the sidebar is scannable reference material, not reading prose. Content pieces are distinguished from each other by color/style (plain `ink-900` vs `navy-700` subtitle vs underlined `navy-700` link — link and subtitle share a color, so the underline is what marks a link), not by size. Only the main column's flowing prose (Experience/Projects bullets) stays at Body's `text-sm`.
 
 ## Layout
 
@@ -63,10 +65,10 @@ Two-column: main column (left, ~65-70% width) + sidebar (right, ~30-35% width).
 - Section labels: uppercase, `navy-700`, small-caps feel, margin-top small / margin-bottom tight. Main column: thin `wood-500` divider rule above (except the first section). Sidebar: plain `space-y-6` between sections instead — a divider rule read as too heavy/cluttered at 5 back-to-back sections in a narrow column.
 - Links (`ActionLink`): always underlined (`decoration-navy-200`, `hover:decoration-navy-700`) — color alone doesn't survive print/grayscale, so links must stay visually distinct from plain colored text (e.g. entry subtitle/company in `navy-700`) by more than hue.
 - Entry header: title (bold, `ink-900`) + subtitle (company/project, `navy-700`, one line below) on the left; location + date range right-aligned on the same two lines.
-- Bullets: `—` (em dash) marker in `wood-500`, one per paragraph, not `•`. Bold inline spans (`ink-900` on `font-semibold`) call out the key result within a bullet.
+- Bullets: `—` (em dash) marker in `wood-500`, one per paragraph, not `•`. `**bold**` markdown-lite (`renderBullet()`) becomes a semantic `<b>`, inheriting the bullet's `ink-900` — no explicit weight/color class needed.
 - Stack line: trailing italic line per entry, separated from the bullets above with extra top margin (not flush against the last bullet), `ink-500` label ("Stack:") + comma-separated list, `ink-500`.
 - Sidebar skill items: plain text, label + optional `/ Nyrs` suffix; no pill/badge treatment. Secondary/exploratory skills can be dot-separated on one line.
 
 ## Spacing
 
-Tailwind default scale (4px base), compact: section gap `mt-4`/`mt-5`, bullet line-height snug (`leading-snug`).
+Tailwind default scale (4px base), compact. In practice: `space-y-6` between main-column/sidebar sections, `mt-2`/`mt-3` from a `SectionLabel` to its content, `mt-1` when there's no caption line buffering a label-to-link jump (Certificates, Selected Work), `gap-4`/`gap-8` for row/grid layouts.
