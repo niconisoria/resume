@@ -41,7 +41,7 @@ Defaults to `prefers-color-scheme: dark`, overridable via a fixed corner toggle 
 | Display (name)            | `Fraunces`                                | 700    | —                        |
 | Section label             | System sans (Tailwind default), uppercase | 600    | `text-xs`                |
 | Body (prose, main column) | System sans                               | 400    | `text-sm`                |
-| Sidebar content (all)     | System sans                               | 400    | `text-2xs`               |
+| Sidebar content (all)     | System sans                               | 400    | `text-xs`                |
 | Entry title               | System sans                               | 700    | —                        |
 | Subtitle                  | System sans, `navy-700`                   | 500    | —                        |
 | Caption/meta              | System sans                               | 400    | `text-2xs` (`0.6875rem`) |
@@ -50,7 +50,7 @@ Fraunces is the only loaded web font — plain `<link>` to Google Fonts in `Layo
 
 `text-2xs` is a registered token (`@theme` in `global.css`), not an arbitrary value.
 
-Section label stays compact (`text-xs`) — distinguished from what's under it by weight/case/color (bold, uppercase, `navy-700`), not by being the biggest thing in the section. Everything inside the sidebar (Summary paragraph included) is `text-2xs` — the sidebar is scannable reference material, not reading prose. Content pieces are distinguished from each other by color/style (plain `ink-900` vs `navy-700` subtitle vs underlined `navy-700` link — link and subtitle share a color, so the underline is what marks a link), not by size. Only the main column's flowing prose (Experience/Projects bullets) stays at Body's `text-sm`.
+Section label stays compact (`text-xs`) — distinguished from what's under it by weight/case/color (bold, uppercase, `navy-700`), not by being the biggest thing in the section. Everything inside the sidebar is `text-xs` — the sidebar is scannable reference material, not reading prose. Content pieces are distinguished from each other by color/style (plain `ink-900` vs `navy-700` subtitle vs underlined `navy-700` link — link and subtitle share a color, so the underline is what marks a link), not by size. Only the main column's flowing prose (Experience/Projects bullets) stays at Body's `text-sm`.
 
 ## Layout
 

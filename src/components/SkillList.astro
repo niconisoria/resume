@@ -14,15 +14,15 @@ const { label, caption, items, secondary } = Astro.props;
 
 <div>
   <SectionLabel text={label} />
-  {caption && <p class="mt-1 text-2xs text-ink-500">{caption}</p>}
+  {caption && <p class="mt-1 text-xs text-ink-500">{caption}</p>}
   <div class={caption ? "mt-2 space-y-1" : "mt-1 space-y-1"}>
     {items.map((item) =>
       item.href ? (
         <ActionLink href={item.href}>
-          <span class="text-2xs">{item.label}</span>
+          <span class="text-xs">{item.label}</span>
         </ActionLink>
       ) : (
-        <div class="text-2xs text-ink-900">
+        <div class="text-xs text-ink-900">
           {item.label}
           {item.years != null && (
             <span class="text-ink-500"> / {item.years}</span>
@@ -32,7 +32,7 @@ const { label, caption, items, secondary } = Astro.props;
     )}
   </div>
   {secondary && (
-    <p class="mt-2 text-2xs text-ink-500 italic">
+    <p class="mt-2 text-xs text-ink-500 italic">
       {secondary.caption}: {secondary.items.join(" · ")}
     </p>
   )}
