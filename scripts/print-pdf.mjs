@@ -42,11 +42,16 @@ function connect(webSocketDebuggerUrl) {
   const ws = new WebSocket(webSocketDebuggerUrl);
   let nextId = 1;
   const pending = new Map();
+  const eventWaiters = new Map();
   ws.addEventListener("message", (event) => {
     const msg = JSON.parse(event.data.toString());
     if (msg.id && pending.has(msg.id)) {
       pending.get(msg.id)(msg);
       pending.delete(msg.id);
+    } else if (msg.method && eventWaiters.has(msg.method)) {
+      const resolve = eventWaiters.get(msg.method);
+      eventWaiters.delete(msg.method);
+      resolve(msg.params);
     }
   });
   const send = (method, params = {}) =>
@@ -61,23 +66,35 @@ function connect(webSocketDebuggerUrl) {
       });
       ws.send(JSON.stringify({ id, method, params }));
     });
-  return { ws, send };
+  // Registers interest in a one-off CDP event *before* triggering whatever
+  // causes it - avoids racing a JS-evaluated readiness check against a
+  // navigation that may not have started yet (the actual cause of the
+  // occasional blank/short PDF: we were measuring the pre-navigation page).
+  const waitForEvent = (method) =>
+    new Promise((resolve) => eventWaiters.set(method, resolve));
+  return { ws, send, waitForEvent };
 }
 
 async function main() {
   await waitForDebugger();
 
-  const created = await fetch(
-    `http://localhost:${DEBUG_PORT}/json/new?${encodeURIComponent(PREVIEW_URL)}`,
-    { method: "PUT" },
-  ).then((res) => res.json());
+  // Open a blank target and navigate ourselves (rather than /json/new?url=,
+  // which starts navigating immediately) so we can register the
+  // Page.loadEventFired listener before triggering it - no race.
+  const created = await fetch(`http://localhost:${DEBUG_PORT}/json/new`, {
+    method: "PUT",
+  }).then((res) => res.json());
 
-  const { ws, send } = connect(created.webSocketDebuggerUrl);
+  const { ws, send, waitForEvent } = connect(created.webSocketDebuggerUrl);
   await new Promise((resolve) => ws.addEventListener("open", resolve));
 
+  await send("Page.enable");
+  const loadFired = waitForEvent("Page.loadEventFired");
+  await send("Page.navigate", { url: PREVIEW_URL });
+  await loadFired;
+
   await send("Runtime.evaluate", {
-    expression:
-      "new Promise(resolve => { const go = () => document.fonts.ready.then(resolve); if (document.readyState === 'complete') go(); else window.addEventListener('load', go); })",
+    expression: "document.fonts.ready",
     awaitPromise: true,
   });
 
@@ -101,6 +118,11 @@ async function main() {
     expression: "document.documentElement.scrollHeight",
   });
   const heightPx = heightResult.result.value;
+  if (heightPx < 500) {
+    throw new Error(
+      `Measured page height (${heightPx}px) looks broken - expected real resume content. Aborting instead of writing a bad PDF.`,
+    );
+  }
   // Small safety buffer - printToPDF's content box is paperWidth minus
   // margins, slightly narrower than the measurement width, which can
   // rewrap a line or two and grow the real height a touch.
