@@ -6,6 +6,7 @@ const jobs = [
   {
     title: "Senior Software Engineer",
     company: "Acme Corp",
+    companyHref: "https://acme.example.com",
     location: "Remote",
     startDate: "2022-01",
     endDate: "Present",
@@ -18,6 +19,7 @@ const jobs = [
   {
     title: "Software Engineer",
     company: "Beta Inc",
+    companyHref: "#",
     location: "Buenos Aires, AR",
     startDate: "2018-03",
     endDate: "2022-12",
@@ -80,6 +82,21 @@ describe("Experience", () => {
     expect(html).toContain("React");
     const stackMatch = html.match(/<p[^>]*>Stack:[^<]*Ruby[\s\S]*?<\/p>/)?.[0];
     expect(stackMatch).toContain("italic");
+  });
+
+  it("renders company as a real link, opening external hrefs in a new tab", async () => {
+    const html = await render();
+    const companyAnchor = html.match(
+      /<a[^>]*>(?:(?!<\/a>).)*?Acme Corp(?:(?!<\/a>).)*?<\/a>/s,
+    )?.[0];
+    expect(companyAnchor).toBeDefined();
+    expect(companyAnchor).toContain('href="https://acme.example.com"');
+    expect(companyAnchor).toContain('target="_blank"');
+
+    const placeholderAnchor = html.match(
+      /<a[^>]*>(?:(?!<\/a>).)*?Beta Inc(?:(?!<\/a>).)*?<\/a>/s,
+    )?.[0];
+    expect(placeholderAnchor).not.toContain('target="_blank"');
   });
 
   it("renders jobs in the order given (newest first)", async () => {

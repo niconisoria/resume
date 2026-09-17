@@ -1,10 +1,12 @@
 ---
+import ActionLink from "./ActionLink.astro";
 import EntryBody from "./EntryBody.astro";
 import SectionLabel from "./SectionLabel.astro";
 
 interface Job {
   title: string;
   company: string;
+  companyHref: string;
   location: string;
   startDate: string;
   endDate: string;
@@ -27,9 +29,9 @@ const { jobs } = Astro.props;
         <div class="flex items-baseline justify-between gap-4">
           <div>
             <div class="text-sm font-bold text-ink-900">{job.title}</div>
-            <div class="text-2xs font-medium text-navy-700 italic">
-              {job.company}
-            </div>
+            <ActionLink href={job.companyHref}>
+              <span class="text-sm font-medium italic">{job.company}</span>
+            </ActionLink>
           </div>
           <div class="text-right text-2xs text-ink-500">
             <div>{job.location}</div>
