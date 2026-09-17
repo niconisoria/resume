@@ -16,7 +16,6 @@
 | --------- | ---------------------------------------------------------------- |
 | Language  | JavaScript/TypeScript                                            |
 | Framework | Astro 7                                                          |
-| UI        | React 19 (`@astrojs/react`)                                      |
 | Styling   | Tailwind CSS 4 (`@tailwindcss/vite`)                             |
 | Runtime   | Node.js ≥22.12                                                   |
 | Test      | `npm test` (Vitest + Astro Container API)                        |
@@ -62,7 +61,6 @@ Manage with `astro dev stop`, `astro dev status`, `astro dev logs`.
 - [docs/specs/](docs/specs/) — feature specs (start here for any new work)
 - [Astro routing](https://docs.astro.build/en/guides/routing/)
 - [Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Framework components (React/Vue/Svelte)](https://docs.astro.build/en/guides/framework-components/)
 - [Content collections](https://docs.astro.build/en/guides/content-collections/)
 - [Styling / Tailwind](https://docs.astro.build/en/guides/styling/)
 - [i18n](https://docs.astro.build/en/guides/internationalization/)
