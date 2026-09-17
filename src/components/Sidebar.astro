@@ -13,6 +13,7 @@ interface SkillGroup {
 interface EducationEntry {
   degree: string;
   institution: string;
+  institutionHref: string;
   startDate: string;
   endDate: string;
 }
@@ -22,7 +23,7 @@ interface Props {
   frameworks: SkillGroup;
   education: EducationEntry[];
   certificates: SkillGroup;
-  selectedWork: { label: string; href: string }[];
+  selectedWork: { company: string; project: string; href: string }[];
 }
 
 const { languages, frameworks, education, certificates, selectedWork } =
@@ -61,8 +62,9 @@ const { languages, frameworks, education, certificates, selectedWork } =
     <ul class="mt-1 space-y-1">
       {selectedWork.map((item) => (
         <li>
+          <span class="text-2xs text-ink-500">{item.company} / </span>
           <ActionLink href={item.href}>
-            <span class="text-2xs">{item.label}</span>
+            <span class="text-2xs">{item.project}</span>
           </ActionLink>
         </li>
       ))}

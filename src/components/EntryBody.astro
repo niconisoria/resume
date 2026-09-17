@@ -1,20 +1,51 @@
 ---
+import ActionLink from "./ActionLink.astro";
 import { renderBullet } from "./bullet";
 
-interface Props {
+export interface ProjectGroup {
+  name: string;
+  href?: string;
   achievements: string[];
+}
+
+interface Props {
+  achievements?: string[];
+  projects?: ProjectGroup[];
   stack: string[];
 }
 
-const { achievements, stack } = Astro.props;
+const { achievements = [], projects = [], stack } = Astro.props;
 ---
 
-<div class="mt-2 space-y-1">
-  {achievements.map((achievement) => (
-    <p class="text-sm text-ink-900">
-      <span class="font-semibold text-wood-500">— </span>
-      <span set:html={renderBullet(achievement)} />
-    </p>
+<div class="mt-2 space-y-3">
+  {projects.map((project) => (
+    <div class="space-y-1">
+      <p class="text-sm font-semibold text-ink-900">
+        {project.href ? (
+          <ActionLink href={project.href}>{project.name}</ActionLink>
+        ) : (
+          project.name
+        )}
+      </p>
+      <div class="space-y-1">
+        {project.achievements.map((achievement) => (
+          <p class="pl-3 text-sm text-ink-900">
+            <span class="font-semibold text-wood-500">— </span>
+            <span set:html={renderBullet(achievement)} />
+          </p>
+        ))}
+      </div>
+    </div>
   ))}
+  {achievements.length > 0 && (
+    <div class="space-y-1">
+      {achievements.map((achievement) => (
+        <p class="text-sm text-ink-900">
+          <span class="font-semibold text-wood-500">— </span>
+          <span set:html={renderBullet(achievement)} />
+        </p>
+      ))}
+    </div>
+  )}
 </div>
 <p class="mt-2.5 text-2xs text-ink-500 italic">Stack: {stack.join(", ")}</p>

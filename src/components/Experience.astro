@@ -1,6 +1,7 @@
 ---
 import ActionLink from "./ActionLink.astro";
 import EntryBody from "./EntryBody.astro";
+import type { ProjectGroup } from "./EntryBody.astro";
 import SectionLabel from "./SectionLabel.astro";
 
 interface Job {
@@ -10,7 +11,8 @@ interface Job {
   location: string;
   startDate: string;
   endDate: string;
-  achievements: string[];
+  achievements?: string[];
+  projects?: ProjectGroup[];
   stack: string[];
 }
 
@@ -40,7 +42,11 @@ const { jobs } = Astro.props;
             </div>
           </div>
         </div>
-        <EntryBody achievements={job.achievements} stack={job.stack} />
+        <EntryBody
+          achievements={job.achievements}
+          projects={job.projects}
+          stack={job.stack}
+        />
       </div>
     ))}
   </div>

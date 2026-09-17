@@ -5,6 +5,7 @@ import Projects from "./Projects.astro";
 const items = [
   {
     title: "SCIM Bridge",
+    href: "https://github.com/niconisoria/scim-bridge",
     achievements: [
       "Python/FastAPI service translating Okta SCIM 2.0 requests into Brivo Access API calls",
       "Saga-based orchestrator with **automatic rollback**",
@@ -13,6 +14,7 @@ const items = [
   },
   {
     title: "Second Project",
+    href: "#",
     achievements: ["Did a thing"],
     stack: ["Go"],
   },
@@ -55,6 +57,23 @@ describe("Projects", () => {
     const html = await render();
     expect(html).toContain("Python");
     expect(html).toContain("Go");
+  });
+
+  it("renders title as a real link, opening external hrefs in a new tab", async () => {
+    const html = await render();
+    const titleAnchor = html.match(
+      /<a[^>]*>(?:(?!<\/a>).)*?SCIM Bridge(?:(?!<\/a>).)*?<\/a>/s,
+    )?.[0];
+    expect(titleAnchor).toBeDefined();
+    expect(titleAnchor).toContain(
+      'href="https://github.com/niconisoria/scim-bridge"',
+    );
+    expect(titleAnchor).toContain('target="_blank"');
+
+    const placeholderAnchor = html.match(
+      /<a[^>]*>(?:(?!<\/a>).)*?Second Project(?:(?!<\/a>).)*?<\/a>/s,
+    )?.[0];
+    expect(placeholderAnchor).not.toContain('target="_blank"');
   });
 
   it("renders projects in the order given", async () => {

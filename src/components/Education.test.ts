@@ -6,6 +6,7 @@ const items = [
   {
     degree: "MSc Systems Engineering",
     institution: "Universidad Tecnológica Nacional",
+    institutionHref: "https://www.utn.edu.ar",
     startDate: "2015",
     endDate: "2020",
   },
@@ -43,6 +44,16 @@ describe("Education", () => {
     expect(institutionClass).toContain("font-medium");
   });
 
+  it("renders institution as a real link, opening external hrefs in a new tab", async () => {
+    const html = await render();
+    const institutionAnchor = html.match(
+      /<a[^>]*>(?:(?!<\/a>).)*?Universidad Tecnológica Nacional(?:(?!<\/a>).)*?<\/a>/s,
+    )?.[0];
+    expect(institutionAnchor).toBeDefined();
+    expect(institutionAnchor).toContain('href="https://www.utn.edu.ar"');
+    expect(institutionAnchor).toContain('target="_blank"');
+  });
+
   it("renders multiple entries when given", async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Education, {
@@ -52,6 +63,7 @@ describe("Education", () => {
           {
             degree: "BSc Computer Science",
             institution: "Some University",
+            institutionHref: "#",
             startDate: "2010",
             endDate: "2014",
           },

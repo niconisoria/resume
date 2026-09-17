@@ -106,4 +106,51 @@ describe("Experience", () => {
     expect(firstIdx).toBeGreaterThanOrEqual(0);
     expect(secondIdx).toBeGreaterThan(firstIdx);
   });
+
+  it("supports grouping achievements under multiple named projects", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Experience, {
+      props: {
+        jobs: [
+          {
+            title: "Software Engineer",
+            company: "Multi Co",
+            companyHref: "https://multi.example.com",
+            location: "Remote",
+            startDate: "2021-01",
+            endDate: "2022-01",
+            projects: [
+              {
+                name: "Project One",
+                href: "https://project-one.example.com",
+                achievements: ["Built the first thing"],
+              },
+              {
+                name: "Project Two",
+                achievements: ["Built the second thing"],
+              },
+            ],
+            achievements: ["Shared across both projects"],
+            stack: ["Ruby"],
+          },
+        ],
+      },
+    });
+
+    expect(html).toContain("Project One");
+    expect(html).toContain("Built the first thing");
+    expect(html).toContain("Project Two");
+    expect(html).toContain("Built the second thing");
+    expect(html).toContain("Shared across both projects");
+
+    const projectOneAnchor = html.match(
+      /<a[^>]*>(?:(?!<\/a>).)*?Project One(?:(?!<\/a>).)*?<\/a>/s,
+    )?.[0];
+    expect(projectOneAnchor).toBeDefined();
+    expect(projectOneAnchor).toContain(
+      'href="https://project-one.example.com"',
+    );
+
+    expect(html).not.toMatch(/<a[^>]*>(?:(?!<\/a>).)*?Project Two<\/a>/s);
+  });
 });

@@ -1,10 +1,12 @@
 ---
+import ActionLink from "./ActionLink.astro";
 import SectionLabel from "./SectionLabel.astro";
 
 interface Props {
   items: {
     degree: string;
     institution: string;
+    institutionHref: string;
     startDate: string;
     endDate: string;
   }[];
@@ -19,7 +21,9 @@ const { items } = Astro.props;
     {items.map((item) => (
       <div>
         <div class="text-2xs text-ink-900">{item.degree}</div>
-        <div class="text-2xs font-medium text-ink-900">{item.institution}</div>
+        <ActionLink href={item.institutionHref}>
+          <span class="text-2xs font-medium">{item.institution}</span>
+        </ActionLink>
         <div class="text-2xs text-ink-500">
           {item.startDate}–{item.endDate}
         </div>

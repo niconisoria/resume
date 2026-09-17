@@ -18,6 +18,7 @@ const props = {
     {
       degree: "MSc Systems Engineering",
       institution: "Universidad Tecnológica Nacional",
+      institutionHref: "https://www.utn.edu.ar",
       startDate: "2015",
       endDate: "2020",
     },
@@ -30,10 +31,11 @@ const props = {
   },
   selectedWork: [
     {
-      label: "SCIM Bridge",
+      company: "Personal project",
+      project: "SCIM Bridge",
       href: "https://github.com/niconisoria/scim-bridge",
     },
-    { label: "Internal tool", href: "#" },
+    { company: "Acme Corp", project: "Internal tool", href: "#" },
   ],
 };
 
@@ -74,12 +76,23 @@ describe("Sidebar", () => {
     expect(html).toContain("Astro");
   });
 
-  it("renders selected-work items as link-only, no description text", async () => {
+  it("renders selected-work items with company separated from the project link", async () => {
     const html = await render();
     for (const item of props.selectedWork) {
-      expect(html).toContain(item.label);
+      expect(html).toContain(item.company);
+      expect(html).toContain(item.project);
       expect(html).toContain(`href="${item.href}"`);
     }
+    const listItem = html.match(
+      /<li>(?:(?!<\/li>).)*?SCIM Bridge(?:(?!<\/li>).)*?<\/li>/s,
+    )?.[0];
+    expect(listItem).toBeDefined();
+    const companySpan = listItem?.match(
+      /<span class="[^"]*">Personal project \/ <\/span>/,
+    )?.[0];
+    expect(companySpan).toContain("text-ink-500");
+    const linkAnchor = listItem?.match(/<a[^>]*>[\s\S]*?SCIM Bridge/)?.[0];
+    expect(linkAnchor).toBeDefined();
   });
 
   it('keeps selected-work "#" links inert while opening real links in a new tab', async () => {
@@ -115,6 +128,7 @@ describe("Sidebar", () => {
           {
             degree: "A different degree entirely",
             institution: "A different school",
+            institutionHref: "#",
             startDate: "1999",
             endDate: "2003",
           },
