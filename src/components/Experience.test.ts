@@ -8,7 +8,7 @@ const jobs = [
     company: "Acme Corp",
     companyHref: "https://acme.example.com",
     location: "Remote",
-    startDate: "2022-01",
+    startDate: "01/2022",
     endDate: "Present",
     achievements: [
       "Led migration to microservices",
@@ -21,8 +21,8 @@ const jobs = [
     company: "Beta Inc",
     companyHref: "#",
     location: "Buenos Aires, AR",
-    startDate: "2018-03",
-    endDate: "2022-12",
+    startDate: "03/2018",
+    endDate: "12/2022",
     achievements: ["Built payments pipeline"],
     stack: ["Python", "FastAPI"],
   },
@@ -40,7 +40,7 @@ describe("Experience", () => {
     expect(html).toContain("Senior Software Engineer");
     expect(html).toContain("Acme Corp");
     expect(html).toContain("Remote");
-    expect(html).toContain("2022-01");
+    expect(html).toContain("01/2022");
     expect(html).toContain("Present");
   });
 
@@ -49,7 +49,7 @@ describe("Experience", () => {
     const titleIdx = html.indexOf("Senior Software Engineer");
     const companyIdx = html.indexOf("Acme Corp");
     const locationIdx = html.indexOf("Remote");
-    const datesIdx = html.indexOf("2022-01");
+    const datesIdx = html.indexOf("01/2022 ");
     expect(companyIdx).toBeGreaterThan(titleIdx);
     expect(datesIdx).toBeGreaterThan(locationIdx);
   });
