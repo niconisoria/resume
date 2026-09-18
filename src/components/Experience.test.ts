@@ -153,4 +153,14 @@ describe("Experience", () => {
 
     expect(html).not.toMatch(/<a[^>]*>(?:(?!<\/a>).)*?Project Two<\/a>/s);
   });
+
+  it("stacks the job header (title, company, location, dates) when atsSafe is true", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Experience, {
+      props: { jobs, atsSafe: true },
+    });
+    expect(html).toContain('class="flex flex-col items-start gap-1"');
+    expect(html).toContain('class="text-left text-2xs text-ink-500"');
+    expect(html).not.toContain("justify-between");
+  });
 });

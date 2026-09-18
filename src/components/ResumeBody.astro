@@ -1,0 +1,64 @@
+---
+// Shared page body for index.astro (public) and ats.astro (private,
+// ATS-safe Experience order) — keeps both routes rendering identical
+// markup from one place instead of two hand-copied page files.
+import Experience from "./Experience.astro";
+import Header from "./Header.astro";
+import Projects from "./Projects.astro";
+import SectionLabel from "./SectionLabel.astro";
+import Sidebar from "./Sidebar.astro";
+import { renderBullet } from "./bullet";
+import {
+  headerLinks,
+  jobs,
+  name,
+  personalProjects,
+  sidebar,
+  subtitle,
+  summary,
+} from "../data/resume";
+
+interface Props {
+  pdfHref: string;
+  atsSafe?: boolean;
+}
+
+const { pdfHref, atsSafe = false } = Astro.props;
+---
+
+<Header
+  name={name}
+  subtitle={subtitle}
+  links={[
+    ...headerLinks,
+    {
+      label: "Download PDF",
+      href: pdfHref,
+      icon: "pdf",
+      newTab: true,
+    },
+  ]}
+/>
+<div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[2fr_1fr] print:grid-cols-[2fr_1fr]">
+  <main>
+    <div>
+      <SectionLabel text="Summary" />
+      <p class="mt-2 text-sm text-ink-900" set:html={renderBullet(summary)} />
+    </div>
+    <hr class="mx-auto my-6 w-24 border-t border-wood-500" />
+    <div>
+      <Experience jobs={jobs} atsSafe={atsSafe} />
+    </div>
+    <hr class="mx-auto my-6 w-24 border-t border-wood-500" />
+    <div>
+      <Projects items={personalProjects} />
+    </div>
+  </main>
+  <Sidebar
+    certificates={sidebar.certificates}
+    education={sidebar.education}
+    languages={sidebar.languages}
+    frameworks={sidebar.frameworks}
+    selectedWork={sidebar.selectedWork}
+  />
+</div>

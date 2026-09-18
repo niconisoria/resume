@@ -1,0 +1,303 @@
+import type { ProjectGroup } from "../components/EntryBody.astro";
+
+export interface Job {
+  title: string;
+  company: string;
+  companyHref: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  achievements?: string[];
+  projects?: ProjectGroup[];
+  stack: string[];
+}
+
+export interface PersonalProject {
+  title: string;
+  href: string;
+  achievements: string[];
+  stack: string[];
+}
+
+interface SkillGroup {
+  caption?: string;
+  items: { label: string; years?: number; href?: string }[];
+  secondary?: { caption: string; items: string[] };
+}
+
+interface EducationEntry {
+  degree: string;
+  institution: string;
+  institutionHref: string;
+  startDate: string;
+  endDate: string;
+}
+
+interface SelectedWorkItem {
+  company: string;
+  project: string;
+  href: string;
+}
+
+export interface HeaderLink {
+  label: string;
+  href: string;
+  icon: "email" | "linkedin" | "github" | "booking";
+}
+
+export const name = "Nicolas Nisoria";
+export const subtitle = "Senior Software Engineer";
+
+export const headerLinks: HeaderLink[] = [
+  {
+    label: "nicolas.nisoria@gmail.com",
+    href: "mailto:nicolas.nisoria@gmail.com",
+    icon: "email",
+  },
+  {
+    label: "niconisoria",
+    href: "https://linkedin.com/in/niconisoria",
+    icon: "linkedin",
+  },
+  {
+    label: "niconisoria",
+    href: "https://github.com/niconisoria",
+    icon: "github",
+  },
+  {
+    label: "Book a call",
+    href: "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3yZ09qpZX0Mhcm_V3JOd-nncW3GzShwl07WaBsNvbtH7wdNH69kF1ioKSySfZX894lpdFLG5Xa?gv=true",
+    icon: "booking",
+  },
+];
+
+export const summary =
+  "Senior Software Engineer with **7+ years** of experience owning large-scale systems end-to-end, from architecture through delivery, across fintech, edtech, and hrtech, with full-stack, cross-team collaboration. Hands-on with AI-agent-driven development, building custom agent skills and subagents to accelerate delivery, reduce manual coding effort, and elevate code quality, while translating business needs into efficient, sustainable technical solutions and aligning cross-functional teams on strategic technical decisions.";
+
+export const jobs: Job[] = [
+  {
+    title: "Senior Software Engineer",
+    company: "Vention",
+    companyHref: "https://ventionteams.com",
+    location: "Hybrid - Warsaw",
+    startDate: "10/2022",
+    endDate: "Present",
+    achievements: [
+      "Designed and delivered real-time classroom features using **AnyCable** WebSockets, supporting **thousands of concurrent users**",
+      "Integrated **AWS CloudFront** to refresh cache on demand, keeping content up to date without manual redeploys",
+      "Led modernization of a Ruby on Rails codebase with **7+ years in production**, improving system stability and developer productivity",
+      "Made AI agents a standard part of the development loop across feature work, code review, and testing, applying [Spec-Driven Development](https://github.com/github/spec-kit) and designing custom skills and subagents for repeatable tasks",
+      "Built ETL pipelines connecting the platform, CMS, and LRS, keeping data flowing across distributed systems",
+      "Used profiling and diagnostic tools, including **Sentry**, to track down performance bottlenecks, cutting endpoint response times by **up to 75%** (from ~2s to 500-600ms)",
+      "Authored technical documentation and feature specifications for new system components",
+    ],
+    stack: [
+      "Ruby 2.7",
+      "Rails 5.2",
+      "PostgreSQL",
+      "Redis",
+      "Sidekiq",
+      "AnyCable",
+      "AWS",
+      "CloudFront",
+      "JavaScript",
+      "React.js",
+      "RSpec",
+      "Sentry",
+      "CI/CD",
+    ],
+  },
+  {
+    title: "Software Engineer",
+    company: "The Codest",
+    companyHref: "https://thecodest.co",
+    location: "Remote - Warsaw",
+    startDate: "07/2021",
+    endDate: "10/2022",
+    projects: [
+      {
+        name: "Epassi",
+        href: "https://www.epassi.com",
+        achievements: [
+          "Worked within a **15+ year old legacy** codebase, extending a role-based permission system with a flexible UI and refactoring toward full test coverage",
+          "Reviewed code and worked cross-functionally to ship features spanning web and mobile platforms",
+        ],
+      },
+      {
+        name: "Nursery management system",
+        href: "https://www.youtube.com/watch?v=sjbl6tOyrIo",
+        achievements: [
+          "Owned this system **end to end** (design, implementation, and delivery), maintaining it mostly solo",
+          "Implemented dynamic educational templates based on Finnish educational standards, with custom components and API endpoints",
+          "Developed a real-time chat system enabling seamless teacher-parent interactions",
+          "Upgraded the codebase from **Rails 5 to 6**, redesigning and refactoring for maintainability and readability across the full-stack application",
+          "Established comprehensive testing coverage across acceptance, integration, and unit tests",
+          "Collaborated in an agile team environment, providing technical guidance on solution architecture",
+        ],
+      },
+    ],
+    stack: [
+      "Ruby 2.3/2.7",
+      "Rails 2/5/6",
+      "MySQL",
+      "PostgreSQL",
+      "Redis",
+      "Sidekiq",
+      "Devise",
+      "JavaScript",
+      "React.js",
+      "Grape",
+      "AWS",
+      "RSpec",
+      "Capybara",
+    ],
+  },
+  {
+    title: "Software Engineer",
+    company: "GlobalLogic",
+    companyHref: "https://www.globallogic.com",
+    location: "Remote - Buenos Aires",
+    startDate: "10/2020",
+    endDate: "07/2021",
+    achievements: [
+      "Built customizable CMS features for multi-tenant web and mobile apps on a digital banking platform",
+      "Integrated core banking systems (First Data, FiServ) for secure retail operations",
+      "Hardened test coverage around core banking integrations to reduce regression risk",
+      "Mentored colleagues on Ruby/Rails best practices and supported onboarding of new engineers",
+      "Interviewed candidates for open engineering positions as part of the hiring process",
+      "Led knowledge transfer and documented team processes during [Finastra's acquisition of Malauzai](https://www.finastra.com/press-media/finastra-acquires-malauzai), ensuring continuity across teams",
+    ],
+    stack: ["Ruby", "Rails", "MySQL", "Redis", "Sidekiq", "Devise", "RSpec"],
+  },
+  {
+    title: "Junior Software Engineer",
+    company: "Raxar",
+    companyHref: "https://raxar.dev",
+    location: "Remote - Buenos Aires",
+    startDate: "09/2019",
+    endDate: "10/2020",
+    achievements: [
+      "Designed and built the **entire backend** for [Trackin](https://trackin.com.ar) from scratch",
+      "Tested and resolved bugs across [Increase](https://increase.app), a separate client platform, improving reliability",
+      "Designed technical solutions for new features across client projects, weighing tradeoffs between delivery speed and long-term maintainability",
+    ],
+    stack: [
+      "Ruby",
+      "Rails",
+      "RSpec",
+      "PHP",
+      "Laravel",
+      "Python",
+      "Flask",
+      "JavaScript",
+      "React.js",
+      "Vue.js",
+      "PostgreSQL",
+      "MySQL",
+    ],
+  },
+];
+
+export const personalProjects: PersonalProject[] = [
+  {
+    title: "Clank",
+    href: "https://github.com/niconisoria/clank",
+    achievements: [
+      "Built a spec-driven development pipeline for Claude Code: define, implement, review, and validate skills chained end to end, each stage gated on a hard artifact (a written spec, passing tests, a clean audit) before advancing",
+      "Designed a **model-graded evaluation pipeline**: for each task, generate a solution under the target skill's own definition, then grade it against per-task solution criteria with a second, independent Claude call acting as judge",
+      "Set a numeric pass threshold and wired per-skill and full-suite eval runs, reporting a pass/fail summary plus token-cost estimates per run",
+    ],
+    stack: ["Claude Code Skills", "Python", "Anthropic API"],
+  },
+  {
+    title: "SCIM Bridge",
+    href: "https://github.com/niconisoria/scim-bridge",
+    achievements: [
+      "Built a Python/FastAPI service translating Okta SCIM 2.0 requests into Brivo Access API calls, managing full user/group lifecycle under **rate limits and partial failures**",
+      "Designed a saga-based orchestrator with **automatic rollback** for multi-step Brivo operations, ensuring consistency on failure",
+      "Implemented Redis-backed ID mapping and idempotency locks to prevent duplicate provisioning from concurrent retries",
+      "Added rate limiting, retry logic, and structured logging with correlation IDs for reliability and traceability",
+      "Built a mock Brivo API and full test suite (pytest, fakeredis, respx) for local dev and CI without live dependencies",
+    ],
+    stack: ["Python 3.14", "FastAPI", "Redis", "Docker", "Pytest"],
+  },
+];
+
+export const sidebar: {
+  certificates: SkillGroup;
+  education: EducationEntry[];
+  languages: SkillGroup;
+  frameworks: SkillGroup;
+  selectedWork: SelectedWorkItem[];
+} = {
+  certificates: {
+    items: [
+      {
+        label: "Claude with the Anthropic API",
+        href: "https://verify.skilljar.com/c/iv6y5rczvfc2",
+      },
+      {
+        label: "Model Context Protocol",
+        href: "https://verify.skilljar.com/c/u58s5s5ocyn7",
+      },
+    ],
+  },
+  education: [
+    {
+      degree: "MSc Systems Engineering",
+      institution: "Universidad Tecnológica Nacional",
+      institutionHref: "https://frt.utn.edu.ar",
+      startDate: "2015",
+      endDate: "2020",
+    },
+  ],
+  languages: {
+    caption: "Commercial experience / years",
+    items: [
+      { label: "Ruby", years: 6 },
+      { label: "Javascript", years: 6 },
+      { label: "Python", years: 3 },
+      { label: "PHP", years: 2 },
+      { label: "Typescript", years: 1 },
+    ],
+    secondary: {
+      caption: "Side-project / Fast ramp-up",
+      items: ["Go", "Rust"],
+    },
+  },
+  frameworks: {
+    caption: "Commercial experience / years",
+    items: [
+      { label: "Ruby on Rails", years: 6 },
+      { label: "React.js - Vue.js", years: 3 },
+      { label: "Django - FastAPI", years: 1 },
+      { label: "Laravel", years: 1 },
+    ],
+    secondary: {
+      caption: "Side-project / Fast ramp-up",
+      items: ["Flask", "Astro.js", "Hotwire"],
+    },
+  },
+  selectedWork: [
+    {
+      company: "Vention",
+      project: "In-class activities",
+      href: "https://learn.eltngl.com",
+    },
+    {
+      company: "The Codest",
+      project: "Benefits management",
+      href: "https://www.epassi.com",
+    },
+    {
+      company: "GlobalLogic",
+      project: "Digital banking",
+      href: "https://www.finastra.com",
+    },
+    {
+      company: "Raxar",
+      project: "Waste management",
+      href: "https://trackin.com.ar",
+    },
+  ],
+};

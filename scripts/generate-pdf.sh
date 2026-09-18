@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-# Builds the static site and prints it to public/nicolas-nisoria.pdf as a
-# single continuous page (height fits content, no page breaks) via headless
-# Chrome + CDP, so the PDF always matches the actual production output -
-# deterministic (same build -> same PDF), no dev-server artifacts.
+# Builds the static site and prints both the public and ATS-only routes to
+# PDF as single continuous pages (height fits content, no page breaks) via
+# headless Chrome + CDP, so each PDF always matches the actual production
+# output - deterministic (same build -> same PDF), no dev-server artifacts.
 set -euo pipefail
 
 PORT=4322
-OUT_FILE="nicolas-nisoria.pdf"
 # Must match astro.config.mjs's `base` - not read from there automatically.
 BASE_URL="http://localhost:$PORT/resume/"
 export CHROME_BIN="${CHROME_BIN:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
@@ -33,4 +32,5 @@ if [ "$ready" != true ]; then
   exit 1
 fi
 
-node "$(dirname "$0")/print-pdf.mjs" "$BASE_URL" "$(pwd)/public/$OUT_FILE"
+node "$(dirname "$0")/print-pdf.mjs" "$BASE_URL" "$(pwd)/public/nicolas-nisoria.pdf"
+node "$(dirname "$0")/print-pdf.mjs" "${BASE_URL}ats" "$(pwd)/public/nicolas-nisoria-ats.pdf"
