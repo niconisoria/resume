@@ -240,6 +240,10 @@ export const sidebar: {
         label: "Model Context Protocol",
         href: "https://verify.skilljar.com/c/u58s5s5ocyn7",
       },
+      {
+        label: "Claude Certified Architect - Foundations",
+        href: "https://www.credly.com/badges/9340640e-48e1-4164-8389-0b882ba267f5/public_url",
+      },
     ],
   },
   education: [
