@@ -31,4 +31,20 @@ describe("ats page", () => {
     const href = anchor?.match(/href="([^"]+)"/)?.[1];
     expect(href).toMatch(/^https:\/\/.*\/nicolas-nisoria-ats\.pdf$/);
   });
+
+  it("renders both an EN and a PL language block", async () => {
+    const html = await render();
+    expect(html).toContain('data-lang="en"');
+    expect(html).toContain('data-lang="pl"');
+  });
+
+  it("wires the PL block's PDF link to the ATS PL PDF file", async () => {
+    const html = await render();
+    const anchor = html.match(
+      /<a[^>]*>(?:(?!<\/a>).)*?Pobierz PDF(?:(?!<\/a>).)*?<\/a>/s,
+    )?.[0];
+    expect(anchor).toBeDefined();
+    const href = anchor?.match(/href="([^"]+)"/)?.[1];
+    expect(href).toMatch(/^https:\/\/.*\/nicolas-nisoria-ats-pl\.pdf$/);
+  });
 });

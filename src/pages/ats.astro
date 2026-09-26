@@ -7,8 +7,12 @@ import ResumeBody from "../components/ResumeBody.astro";
 import { withBase } from "../lib/base";
 import Layout from "../layouts/Layout.astro";
 
-const pdfHref = new URL(
+const pdfHrefEn = new URL(
   withBase("nicolas-nisoria-ats.pdf"),
+  import.meta.env.SITE,
+).href;
+const pdfHrefPl = new URL(
+  withBase("nicolas-nisoria-ats-pl.pdf"),
   import.meta.env.SITE,
 ).href;
 ---
@@ -17,5 +21,6 @@ const pdfHref = new URL(
   title="Nicolas Nisoria — ATS resume"
   description="Private ATS-optimized resume."
 >
-  <ResumeBody pdfHref={pdfHref} atsSafe />
+  <ResumeBody pdfHref={pdfHrefEn} lang="en" atsSafe />
+  <ResumeBody pdfHref={pdfHrefPl} lang="pl" atsSafe />
 </Layout>

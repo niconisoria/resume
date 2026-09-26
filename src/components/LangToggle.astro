@@ -1,0 +1,66 @@
+---
+import { labels } from "../data/labels";
+---
+
+<button
+  type="button"
+  id="lang-toggle"
+  class="fixed top-4 right-16 cursor-pointer rounded-full border border-navy-200 bg-paper px-3 py-2 text-xs font-semibold text-navy-700 shadow-sm"
+  aria-label={labels.en.switchToPolish}
+>
+  <span data-lang-option="en">EN</span>
+  <span data-lang-option="pl">PL</span>
+</button>
+
+<style>
+  #lang-toggle [data-lang-option="pl"] {
+    display: none;
+  }
+  :global(:root[data-lang="pl"]) #lang-toggle [data-lang-option="en"] {
+    display: none;
+  }
+  :global(:root[data-lang="pl"]) #lang-toggle [data-lang-option="pl"] {
+    display: inline;
+  }
+  @media print {
+    #lang-toggle {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { labels } from "../data/labels";
+  import type { Lang } from "../data/resume";
+
+  const button = document.getElementById("lang-toggle") as HTMLButtonElement;
+
+  function currentLang(): Lang {
+    return document.documentElement.dataset.lang === "pl" ? "pl" : "en";
+  }
+
+  function applyLabel() {
+    const lang = currentLang();
+    button.setAttribute(
+      "aria-label",
+      lang === "pl" ? labels.pl.switchToEnglish : labels.en.switchToPolish,
+    );
+  }
+
+  function setLang(lang: Lang) {
+    document.documentElement.dataset.lang = lang;
+    try {
+      localStorage.setItem("lang", lang);
+    } catch {
+      // storage blocked (e.g. private mode) — lang still applies for this page view
+    }
+    applyLabel();
+  }
+
+  // lang already applied by Layout's head script; this just syncs the button label
+  applyLabel();
+
+  button.addEventListener("click", () => {
+    setLang(currentLang() === "pl" ? "en" : "pl");
+  });
+</script>

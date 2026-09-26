@@ -8,7 +8,17 @@ import Projects from "./Projects.astro";
 import SectionLabel from "./SectionLabel.astro";
 import Sidebar from "./Sidebar.astro";
 import { renderBullet } from "./bullet";
-import {
+import { labels } from "../data/labels";
+import { getResumeData, type Lang } from "../data/resume";
+
+interface Props {
+  pdfHref: string;
+  lang: Lang;
+  atsSafe?: boolean;
+}
+
+const { pdfHref, lang, atsSafe = false } = Astro.props;
+const {
   headerLinks,
   jobs,
   name,
@@ -16,49 +26,72 @@ import {
   sidebar,
   subtitle,
   summary,
-} from "../data/resume";
-
-interface Props {
-  pdfHref: string;
-  atsSafe?: boolean;
-}
-
-const { pdfHref, atsSafe = false } = Astro.props;
+} = getResumeData(lang);
+const t = labels[lang];
 ---
 
-<Header
-  name={name}
-  subtitle={subtitle}
-  links={[
-    ...headerLinks,
-    {
-      label: "Download PDF",
-      href: pdfHref,
-      icon: "pdf",
-      newTab: true,
-    },
-  ]}
-/>
-<div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[2fr_1fr] print:grid-cols-[2fr_1fr]">
-  <main>
-    <div>
-      <SectionLabel text="Summary" />
-      <p class="mt-2 text-sm text-ink-900" set:html={renderBullet(summary)} />
-    </div>
-    <hr class="mx-auto my-6 w-24 border-t border-wood-500" />
-    <div>
-      <Experience jobs={jobs} atsSafe={atsSafe} />
-    </div>
-    <hr class="mx-auto my-6 w-24 border-t border-wood-500" />
-    <div>
-      <Projects items={personalProjects} />
-    </div>
-  </main>
-  <Sidebar
-    certificates={sidebar.certificates}
-    education={sidebar.education}
-    languages={sidebar.languages}
-    frameworks={sidebar.frameworks}
-    selectedWork={sidebar.selectedWork}
+<div data-lang={lang} lang={lang}>
+  <Header
+    name={name}
+    subtitle={subtitle}
+    links={[
+      ...headerLinks,
+      {
+        label: t.downloadPdf,
+        href: pdfHref,
+        icon: "pdf",
+        newTab: true,
+      },
+    ]}
   />
+  <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[2fr_1fr] print:grid-cols-[2fr_1fr]">
+    <main>
+      <div>
+        <SectionLabel text={t.summary} />
+        <p class="mt-2 text-sm text-ink-900" set:html={renderBullet(summary)} />
+      </div>
+      <hr class="mx-auto my-6 w-24 border-t border-wood-500" />
+      <div>
+        <Experience
+          jobs={jobs}
+          atsSafe={atsSafe}
+          sectionLabel={t.experience}
+          stackLabel={t.stack}
+        />
+      </div>
+      <hr class="mx-auto my-6 w-24 border-t border-wood-500" />
+      <div>
+        <Projects
+          items={personalProjects}
+          sectionLabel={t.personalProjects}
+          stackLabel={t.stack}
+        />
+      </div>
+    </main>
+    <Sidebar
+      certificates={sidebar.certificates}
+      education={sidebar.education}
+      languages={sidebar.languages}
+      frameworks={sidebar.frameworks}
+      selectedWork={sidebar.selectedWork}
+      educationLabel={t.education}
+      certificatesLabel={t.certificates}
+      languagesLabel={t.languages}
+      frameworksLabel={t.frameworks}
+      selectedWorkLabel={t.selectedWork}
+    />
+  </div>
 </div>
+
+<style>
+  [data-lang] {
+    display: none;
+  }
+  :global(:root[data-lang="en"]) [data-lang="en"],
+  :global(:root:not([data-lang])) [data-lang="en"] {
+    display: block;
+  }
+  :global(:root[data-lang="pl"]) [data-lang="pl"] {
+    display: block;
+  }
+</style>

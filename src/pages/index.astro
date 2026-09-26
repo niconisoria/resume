@@ -3,10 +3,15 @@ import ResumeBody from "../components/ResumeBody.astro";
 import { withBase } from "../lib/base";
 import Layout from "../layouts/Layout.astro";
 
-const pdfHref = new URL(withBase("nicolas-nisoria.pdf"), import.meta.env.SITE)
+const pdfHrefEn = new URL(withBase("nicolas-nisoria.pdf"), import.meta.env.SITE)
   .href;
+const pdfHrefPl = new URL(
+  withBase("nicolas-nisoria-pl.pdf"),
+  import.meta.env.SITE,
+).href;
 ---
 
 <Layout>
-  <ResumeBody pdfHref={pdfHref} />
+  <ResumeBody pdfHref={pdfHrefEn} lang="en" />
+  <ResumeBody pdfHref={pdfHrefPl} lang="pl" />
 </Layout>

@@ -24,26 +24,41 @@ interface Props {
   education: EducationEntry[];
   certificates: SkillGroup;
   selectedWork: { company: string; project: string; href: string }[];
+  educationLabel?: string;
+  certificatesLabel?: string;
+  languagesLabel?: string;
+  frameworksLabel?: string;
+  selectedWorkLabel?: string;
 }
 
-const { languages, frameworks, education, certificates, selectedWork } =
-  Astro.props;
+const {
+  languages,
+  frameworks,
+  education,
+  certificates,
+  selectedWork,
+  educationLabel = "Education",
+  certificatesLabel = "Certificates",
+  languagesLabel = "Languages",
+  frameworksLabel = "Frameworks",
+  selectedWorkLabel = "Selected Work",
+} = Astro.props;
 ---
 
 <aside class="self-start space-y-6 rounded-md bg-navy-100 p-4">
   <div>
-    <Education items={education} />
+    <Education items={education} sectionLabel={educationLabel} />
   </div>
   <div>
     <SkillList
-      label="Certificates"
+      label={certificatesLabel}
       caption={certificates.caption}
       items={certificates.items}
     />
   </div>
   <div>
     <SkillList
-      label="Languages"
+      label={languagesLabel}
       caption={languages.caption}
       items={languages.items}
       secondary={languages.secondary}
@@ -51,14 +66,14 @@ const { languages, frameworks, education, certificates, selectedWork } =
   </div>
   <div>
     <SkillList
-      label="Frameworks"
+      label={frameworksLabel}
       caption={frameworks.caption}
       items={frameworks.items}
       secondary={frameworks.secondary}
     />
   </div>
   <div>
-    <SectionLabel text="Selected Work" />
+    <SectionLabel text={selectedWorkLabel} />
     <ul class="mt-1 space-y-1">
       {selectedWork.map((item) => (
         <li>

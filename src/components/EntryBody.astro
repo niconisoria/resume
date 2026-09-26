@@ -12,9 +12,15 @@ interface Props {
   achievements?: string[];
   projects?: ProjectGroup[];
   stack: string[];
+  stackLabel?: string;
 }
 
-const { achievements = [], projects = [], stack } = Astro.props;
+const {
+  achievements = [],
+  projects = [],
+  stack,
+  stackLabel = "Stack",
+} = Astro.props;
 ---
 
 <div class="mt-2 space-y-3">
@@ -48,4 +54,6 @@ const { achievements = [], projects = [], stack } = Astro.props;
     </div>
   )}
 </div>
-<p class="mt-2.5 text-2xs text-ink-500 italic">Stack: {stack.join(", ")}</p>
+<p class="mt-2.5 text-2xs text-ink-500 italic">
+  {stackLabel}: {stack.join(", ")}
+</p>

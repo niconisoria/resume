@@ -19,9 +19,16 @@ interface Job {
 interface Props {
   jobs: Job[];
   atsSafe?: boolean;
+  sectionLabel?: string;
+  stackLabel?: string;
 }
 
-const { jobs, atsSafe = false } = Astro.props;
+const {
+  jobs,
+  atsSafe = false,
+  sectionLabel = "Experience",
+  stackLabel = "Stack",
+} = Astro.props;
 
 // Side by side, the job title/company and location/dates sit in the same
 // visual row split across two columns. Chrome's PDF text extraction reads
@@ -37,7 +44,7 @@ const datesClass = atsSafe
 ---
 
 <section>
-  <SectionLabel text="Experience" />
+  <SectionLabel text={sectionLabel} />
   <div class="mt-3 space-y-6">
     {jobs.map((job) => (
       <div>
@@ -59,6 +66,7 @@ const datesClass = atsSafe
           achievements={job.achievements}
           projects={job.projects}
           stack={job.stack}
+          stackLabel={stackLabel}
         />
       </div>
     ))}

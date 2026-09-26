@@ -10,13 +10,14 @@ interface Props {
     startDate: string;
     endDate: string;
   }[];
+  sectionLabel?: string;
 }
 
-const { items } = Astro.props;
+const { items, sectionLabel = "Education" } = Astro.props;
 ---
 
 <div>
-  <SectionLabel text="Education" />
+  <SectionLabel text={sectionLabel} />
   <div class="mt-2 space-y-3">
     {items.map((item) => (
       <div>

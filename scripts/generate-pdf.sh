@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Builds the static site and prints both the public and ATS-only routes to
-# PDF as single continuous pages (height fits content, no page breaks) via
+# Builds the static site and prints the public and ATS-only routes, each in
+# EN and PL (`?lang=pl`), to PDF as single continuous pages (height fits content, no page breaks) via
 # headless Chrome + CDP, so each PDF always matches the actual production
 # output - deterministic (same build -> same PDF), no dev-server artifacts.
 set -euo pipefail
@@ -33,4 +33,6 @@ if [ "$ready" != true ]; then
 fi
 
 node "$(dirname "$0")/print-pdf.mjs" "$BASE_URL" "$(pwd)/public/nicolas-nisoria.pdf"
+node "$(dirname "$0")/print-pdf.mjs" "${BASE_URL}?lang=pl" "$(pwd)/public/nicolas-nisoria-pl.pdf"
 node "$(dirname "$0")/print-pdf.mjs" "${BASE_URL}ats" "$(pwd)/public/nicolas-nisoria-ats.pdf"
+node "$(dirname "$0")/print-pdf.mjs" "${BASE_URL}ats?lang=pl" "$(pwd)/public/nicolas-nisoria-ats-pl.pdf"

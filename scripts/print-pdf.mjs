@@ -105,7 +105,10 @@ async function main() {
   // Height is deliberately tiny: body has min-h-screen (min-height: 100vh),
   // and 100vh resolves against this override - a tall override makes
   // scrollHeight measure the override, not the real content.
-  const widthPx = Math.round(PAPER_WIDTH_IN * 96);
+  // Measure at the printed content-box width (paper minus side margins), not
+  // the full paper width - otherwise longer text (e.g. the PL resume) rewraps
+  // narrower at print time and spills onto a second page.
+  const widthPx = Math.round((PAPER_WIDTH_IN - MARGIN_IN * 2) * 96);
   await send("Emulation.setDeviceMetricsOverride", {
     width: widthPx,
     height: 100,
@@ -123,9 +126,7 @@ async function main() {
       `Measured page height (${heightPx}px) looks broken - expected real resume content. Aborting instead of writing a bad PDF.`,
     );
   }
-  // Small safety buffer - printToPDF's content box is paperWidth minus
-  // margins, slightly narrower than the measurement width, which can
-  // rewrap a line or two and grow the real height a touch.
+  // Small safety buffer for sub-pixel rounding between measure and print.
   const paperHeightIn = heightPx / 96 + MARGIN_IN * 2 + 0.15;
 
   // Re-point the override's height at the actual paper height so the
