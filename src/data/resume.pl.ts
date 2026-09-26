@@ -36,7 +36,7 @@ export const resumeData: ResumeData = {
       startDate: "10/2022",
       endDate: "Obecnie",
       achievements: [
-        "Zaprojektowałem i dostarczyłem funkcje klasy w czasie rzeczywistym z użyciem WebSocketów **AnyCable**, obsługujące **tysiące jednoczesnych użytkowników**",
+        "Zaprojektowałem i dostarczyłem interaktywne zajęcia klasowe w czasie rzeczywistym z użyciem WebSocketów **AnyCable**, obsługujące **tysiące jednoczesnych użytkowników**",
         "Zintegrowałem **AWS CloudFront** w celu odświeżania cache na żądanie, utrzymując aktualność treści bez ręcznych redeployów",
         "Prowadziłem modernizację kodu Ruby on Rails działającego **7+ lat w produkcji**, poprawiając stabilność systemu i wydajność zespołu",
         "Uczyniłem agentów AI stałym elementem procesu developerskiego w pracach nad funkcjami, code review i testowaniu, stosując [Spec-Driven Development](https://github.com/github/spec-kit) i projektując własne skille i subagenty do powtarzalnych zadań",

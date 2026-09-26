@@ -36,7 +36,7 @@ export const resumeData: ResumeData = {
       startDate: "10/2022",
       endDate: "Present",
       achievements: [
-        "Designed and delivered real-time classroom features using **AnyCable** WebSockets, supporting **thousands of concurrent users**",
+        "Designed and delivered real-time interactive classroom activities using **AnyCable** WebSockets, supporting **thousands of concurrent users**",
         "Integrated **AWS CloudFront** to refresh cache on demand, keeping content up to date without manual redeploys",
         "Led modernization of a Ruby on Rails codebase with **7+ years in production**, improving system stability and developer productivity",
         "Made AI agents a standard part of the development loop across feature work, code review, and testing, applying [Spec-Driven Development](https://github.com/github/spec-kit) and designing custom skills and subagents for repeatable tasks",
