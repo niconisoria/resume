@@ -9,8 +9,12 @@ describe("getResumeData", () => {
 
   it("returns Polish content for 'pl'", () => {
     const data = getResumeData("pl");
-    expect(data.subtitle).not.toBe("Senior Software Engineer");
+    // Job titles stay in English by design (standard practice on PL tech
+    // CVs) — only the surrounding prose is translated.
     expect(data.summary).not.toBe(getResumeData("en").summary);
+    expect(data.jobs[0].achievements?.[0]).not.toBe(
+      getResumeData("en").jobs[0].achievements?.[0],
+    );
   });
 
   it("keeps the same shape (job/project counts) across languages", () => {
